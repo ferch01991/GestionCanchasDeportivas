@@ -9,7 +9,7 @@ include("static/clase_mysql.php");
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<title>Editor usuario</title>
+	<title>Editor</title>
 
 </head>
 <body>
