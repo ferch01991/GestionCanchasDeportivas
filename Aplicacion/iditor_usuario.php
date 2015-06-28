@@ -6,27 +6,23 @@ include("static/clase_mysql.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<title>Editor Usuario</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/estilos.css">
+
+    <section id="encabezado" style="background-image: url('img/header-sprite.png');background-repeat: no-repeat; ">
+        <h2>Perfil</h2>
+    </section>
 
 </head>
-<body>
-    <div class="container" style="background: #ccc; text-align:center;">
-        <h1>Perfil Usuario</h1>
-    </div>
+<body style="background-image: url('img/fondo.jpg');background-repeat: no-repeat;">
+
+  
   <div class="container">
-  	<div class="row">
-  		<div class="col-md-12">
-  		<h2>Avance(%)</h2>
-  			<div class="progress">
-  			<div class="progress-bar" role="progressbar" aria-valuenow="50"
-  				aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-  				<span class="sr-only">20% completado</span>
-  			</div>
-  		</div>
-  		</div>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
        <?php
         $conexion = new clase_mysql;
         $conexion->conectar($db_name,$db_host, $db_user,$db_password);
@@ -34,12 +30,12 @@ include("static/clase_mysql.php");
         $conexion->verconsulta2();
        ?>
 
-  	</div>
-  	
-  	</div>
+    </div>
+    
+    </div>
   
 </body>
- <footer class="footer" style="background: #ccc; padding:10px; text-align:center">
-	<h4>Derechos reservados</h4>
+ <footer style="background-image: url('img/fondopie.jpg');">
+  <h4>Derechos reservados</h4>
 </footer>
 </html>

@@ -1,16 +1,18 @@
+
 *{
-	margin: 0 auto;
-	padding: 0 auto;
+	margin: 0px; padding: 0px;
 }
-h1{
-	text-align: center;
-	background: blue;
-	width: 100%;
-	float: left;
+h2,h4,h1{
+	color:#fff;
 }
-h2{
-	font-size: 2em;
+#encabezado{
+	text-align:center;margin-top:-20px;height:-5px
+}
+#map{
+ border: 2px solid;border-radius: 25px;
+ height: 425px; width: 600px; 
 }
 footer{
 	text-align: center;
+	 padding:10px; margin-right:-105px;margin-left:-106px
 }

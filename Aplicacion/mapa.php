@@ -19,9 +19,12 @@ include("static/clase_mysql.php");
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+
 	<title>Mapa</title>
-	<link rel="stylesheet" href="css/estilos.css">
+	<section id="encabezado" style="background-image: url('img/header-sprite.png');background-repeat: no-repeat; ">
 	<h1>Confirmar Partido</h1>
+	</section>
 
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	<script >
@@ -59,11 +62,11 @@ include("static/clase_mysql.php");
 	</script>
 	</head>
      
-    <body> 
+    <body  style="background-image: url('img/fondo.jpg');background-repeat: no-repeat;"> 
     	
      <div class="container">
      	<div class='row'>
-     		<div class='col-md-6' style="background:#ccc;  padding-bottom: 182px;">
+     		<div class='col-md-6' style='padding-bottom: 182px;'>
      			<center>
     	<?php
     		$miconexion->consulta("SELECT * FROM canchas WHERE id='1'");
@@ -72,11 +75,14 @@ include("static/clase_mysql.php");
     		 </center>
     	</div>
     	<div class='col-md-6'>
-    <div align="center" id="map" style="height: 425px; width: 600px;">
+    <div align="center" id="map">
 
     </div>
       </div>
         </div>
 
     </body>
+     <footer style="background-image: url('img/fondopie.jpg'); padding:10px; text-align:center; margin-right:-105px;margin-left:-106px">
+	<h4>Derechos reservados</h4>
+</footer>
     </html>

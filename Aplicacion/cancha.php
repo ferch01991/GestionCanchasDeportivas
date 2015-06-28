@@ -5,14 +5,11 @@ include("static/clase_mysql.php");
 ?>
 <html>
 <head>
-	<title></title>
+	<title>Cancha</title>
 	<link rel="stylesheet" type="text/css" href="style/estylos.css">
-</head>
-<body>
-	
-	
-
-	<script type="text/javascript">
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		
+<script type="text/javascript">
 		var cv, cx, objetos, objetoActual=null;
 		var inicioX=0, inicioY=0;
 		var img = new Image();
@@ -20,9 +17,8 @@ include("static/clase_mysql.php");
 
 
 		function actualizar(){
-			//cx.fillStyle='#f0f0f0';
-			//cx.fillRect(0,0,400,300);
-			cx.drawImage(img, 0, 0);
+			cx.drawImage(img, 150, 100);
+			cx.textAlign='center';
 		for(var i =0; i<objetos.length;i++){
 			cx.fillStyle = objetos[i].color;
 			cx.fillRect(objetos[i].x,objetos[i].y,objetos[i].width,objetos[i].height);
@@ -31,17 +27,18 @@ include("static/clase_mysql.php");
 	function dibujar(res){
 		var jugadores = res/2;
 		objetos = [];
+
 		for(var i=0; i<jugadores; i++){
 			
 			objetos.push({
-				x: 0, y:40,
+				x: 150, y:100,
 				width: 20, height: 20,
 				color: '#000000'
 
 			});
 
 			objetos.push({
-				x: 0, y:80,
+				x: 550, y:100,
 				width: 20, height: 20,
 				color: '#fff'
 
@@ -49,13 +46,20 @@ include("static/clase_mysql.php");
 			
 		}
 	}
+
+
+
 		window.onload = function(){
 			
 			cv = document.getElementById('lienzo');
 			cx = cv.getContext('2d');
+
 			function dibujar(res){
 		
 			}
+
+		
+
 			
 			actualizar();
 			
@@ -89,9 +93,14 @@ include("static/clase_mysql.php");
 
 
 	</script>
-
 	
-	<canvas width="650" height="275" id="lienzo"></canvas>
+</head>
+<body style="background-image: url('img/fondo.jpg')">
+	
+
+	<!--<section style="margin-left:450px; margin-top:110px">-->
+	<canvas width="750px" height="381" id="lienzo"></canvas>
+	 <!--</section>-->
 	 <?php 
 
 	 $conexion = new clase_mysql;
@@ -111,5 +120,9 @@ include("static/clase_mysql.php");
             <?php 
         
      ?> 
+     
 </body>
+ <footer style="background-image: url('img/fondopie.jpg'); padding:10px; text-align:center; margin-right:-105px;margin-left:-106px; margin-top:200px;">
+	<h4>Derechos reservados</h4>
+</footer>
 </html>
