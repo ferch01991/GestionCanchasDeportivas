@@ -1,0 +1,129 @@
+#bodyInicio{
+	background-image: url("../imagenes/fondos/fondoInicio.png");
+}
+
+#bodyMuro{
+	background-image: url("../imagenes/fondos/fondo2.jpg");
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#bodyEditarUsuario{
+	background-image: url("../imagenes/fondos/fondo2.jpg");
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;	
+}
+
+#registro{
+	
+	width: 30%;
+	display: inline-block;
+	padding: 1em;
+	margin: 1em;
+	margin-right: 6em;
+}
+
+#imagenInicio{
+	width: 59%;
+	display: inline-block;
+	padding: 1em;
+	margin: 1em;
+}
+
+#izquierda{
+	
+	padding: 1em;
+	margin: 1em;
+	width: 17%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#centro{
+	border: dotted;
+	padding: 1em;
+	margin: 1em;
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#derecha{
+	border: solid;
+	padding: 1em;
+	margin: 1em;
+	width: 22%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#imagenUsuario{
+	width: 140px;
+	height: 140px;
+	border: solid;
+	border-color: #757171;
+	-moz-border-radius: 70px;
+	-webkit-border-radius: 70px;
+	border-radius: 70px;
+	position: relative;
+	display:list-item;
+}
+
+h4{
+	color: #FFFFFF;
+}
+
+#infopartidos{
+	width: 100%;
+	height: 50%;
+	background-color: #FFFFFF;
+	border: solid;
+	border-radius: 20px;
+	opacity: 0.5;
+	overflow: scroll;
+}
+
+#infopartidos::-webkit-scrollbar { 
+    display: none; 
+}
+
+hr {border: 2px inset #eee; height: 1px; width: 80%;}
+
+#botonEditarUsuario{
+	position: absolute;
+	vertical-align: top;
+	display:list-item;
+}
+
+#imagenUsuario2{
+	border: solid;
+	width: 360px;
+	height: 360px;
+	border: solid;
+	border-color: #757171;
+	-moz-border-radius: 180px;
+	-webkit-border-radius: 180px;
+	border-radius: 180px;
+	position: absolute;
+}
+
+#editarIzquierda{
+	padding: 1em;
+	margin: 1em;
+	width: 30%;
+	display: inline-block;
+	
+}
+
+#editarDerecha{
+	border: solid;
+	padding: 1em;
+	margin: 1em;
+	width: 20%;
+	display: inline-block;
+	
+}
