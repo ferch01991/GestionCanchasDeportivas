@@ -1,59 +1,73 @@
 <?php
-class clase_mysql{
+ class clase_mysql{
+ 	/*Variables para la conexion a la db*/
+ 	var $BaseDatos;
+ 	var $Servidor;
+ 	var $Usuario;
+ 	var $Clave;
+ 	/*Identificadores de conexion y consulta*/
+ 	var $Conexion_ID = 0;
+ 	var $Consulta_ID = 0;
+ 	/*Numero de error y error de textos*/
+ 	var $Errno = 0;
+ 	var $Error = "";
+ 	function clase_mysql(){
+ 		//cosntructor
+ 	}
 
-	var $BaseDatos;
-	var $Servidor;
-	var $Usuario;
-	var $Clave;
-	var $Conexion_ID = 0;
-	var $Consulta_ID = 0;
-	var $Errno = 0;
-	var $Error = "";
-	function clase_mysql(){
- 		
-	}
+ 	function conectar($db, $host, $user, $pass){
+ 		if($db!="") $this->BaseDatos = $db;
+ 		if($host!="") $this->Servidor = $host;
+ 		if($user!="") $this->Usuario = $user;
+ 		if($pass!="") $this->Clave = $pass;
 
-	function conectar($db, $host, $user, $pass){
-		if($db!="") $this->BaseDatos = $db;
-		if($host!="") $this->Servidor = $host;
-		if($user!="") $this->Usuario = $user;
-		if($pass!="") $this->Clave = $pass;
-		$this->Conexion_ID=mysql_connect($this->Servidor,$this->Usuario, $this->Clave);
-		if(!$this->Conexion_ID){
-			$this->Error="La conexion con el servidor fallida";
-			return 0;
-		}
+ 		//conectamos al servidor de db
+ 		$this->Conexion_ID=mysql_connect($this->Servidor,$this->Usuario, $this->Clave);
+ 		if(!$this->Conexion_ID){
+ 			$this->Error="La conexion con el servidor fallida";
+ 			return 0;
+ 		}
+
+		//Seleccionamos la base de datos
 		if(!mysql_select_db($this->BaseDatos, $this->Conexion_ID)){
 			$this->Error="Imposible abrir ".$this->BaseDatos;
-			return 0;
+ 			return 0;
 		} 	
-		return $this->Conexion_ID;
-	}	
+		/*Si todo tiene exito, retorno el identificador de la conexion*/
+ 		return $this->Conexion_ID;
+ 	}	
 
-	function consulta($sql){
-		if($sql==""){
-			$this->Error="NO hay ningun sql";
-			return 0;
-		}
-		$this->Consulta_ID = mysql_query($sql, $this->Conexion_ID);
-		if(!$this->Consulta_ID){
-			$this->Errno = mysql_errno();
-			$this->Error = mysql_error();
-		}
-		return $this->Consulta_ID;
-	}
+ 	//Ejecuta cualquier consulta
+ 	function consulta($sql=""){
+ 		if($sql==""){
+ 			$this->Error="NO hay ningun sql";
+ 			return 0;
+ 		}
+ 		//ejecutamos la consulta
+ 		$this->Consulta_ID = mysql_query($sql, $this->Conexion_ID);
+ 		if(!$this->Consulta_ID){
+ 			$this->Errno = mysql_errno();
+ 			$this->Error = mysql_error();
+ 		}
+ 		//retorna la consulta ejecutada
+ 		return $this->Consulta_ID;
+ 	}
 
-	function numcampos(){
-		return @mysql_num_fields($this->Consulta_ID);
-	}
+ 	//Devulve el numero de campos de la culsulta
+ 	function numcampos(){
+ 		return @mysql_num_fields($this->Consulta_ID);
+ 	}
 
-	function numregistros(){
-		return mysql_num_rows($this->Consulta_ID);
-	}
+ 	//Devuleve el numero de registros de la culsulta
+ 	function numregistros(){
+ 		return @mysql_num_rows($this->Consulta_ID);
+ 	}
 
-	function nombrecampo($numcampo){
-		return mysql_field_name($this->Consulta_ID, $numcampo);
-	}
+ 	//Devuelve el nombre de un campo de la consulta
+ 	function nombrecampo($numcampo){
+ 		return mysql_field_name($this->Consulta_ID, $numcampo);
+ 	}
+
 
 	function autenticar($user, $pass){
 		$res = mysql_query("Select id, email, password from usuarios");
@@ -119,5 +133,9 @@ class clase_mysql{
 		return $idGrupo;
 	}
 
+	
+
 }
+
+
 ?>
