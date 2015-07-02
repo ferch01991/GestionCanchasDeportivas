@@ -153,6 +153,24 @@
       return $datos; 
          
   }
+  function selectcancha(){
+      $canchas = array();
+      $res = $this->consulta("select nombre from canchas");
+     while ($row = mysql_fetch_array($res)) { 
+          array_push($canchas, $row[0]);
+    }
+    return $canchas;
+  }
+
+  function usuarios(){
+    $res = $this->consulta("select nombres, imagen from usuarios");
+    return $res;
+  }
+
+  function partidos(){
+    $res = $this->consulta("select c.nombre, p.fecha, p.hora, p.resultado, p.observacion from partidos p, canchas c where p.id_grupo=1 and p.id_cancha = c.id");
+    return $res;
+  }
 
 	
 
