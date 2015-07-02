@@ -10,7 +10,8 @@
 						<?php
 						$grupos = $conexion->gruposUsuario($id);
 						for ($i = 0; $i < count($grupos); $i++){
-							echo "<li><a href=''>".$grupos[$i]."</a></li>";
+							$idGrupo = $conexion($Grupos[$i], $id);
+							echo "<li><a href='grupos.php?idGrupo=".$idGrupo."&idUsuario=".$id."'>".$grupos[$i]."</a></li>";
 						}
 						?>
 					</ul>
