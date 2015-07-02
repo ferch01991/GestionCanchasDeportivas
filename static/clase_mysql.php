@@ -133,6 +133,23 @@
 		return $idGrupo;
 	}
 
+	 function mapa(){
+  
+    //echo "<section class='contenedor'>";
+    $datos = array();
+    while (@$row = mysql_fetch_array($this->Consulta_ID)) {
+        array_push($datos, $row[0]);
+        array_push($datos, $row[1]);
+        array_push($datos, $row[2]);
+        array_push($datos, $row[3]);
+        array_push($datos, $row[4]);
+        array_push($datos, $row[5]);
+
+      }
+      return $datos; 
+         
+  }
+
 	
 
 }

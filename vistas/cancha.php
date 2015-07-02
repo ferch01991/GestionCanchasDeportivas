@@ -25,6 +25,8 @@ include("../static/clase_mysql.php");
 	}
 	function dibujar(res){
 		var jugadores = res/2;
+		var numJugadores =Math.floor(jugadores);
+		alert("Numero de jugadores confirmados:  " + res);
 		objetos = [];
 
 		for(var i=0; i<jugadores; i++){
@@ -35,6 +37,8 @@ include("../static/clase_mysql.php");
 				color: '#000000'
 
 			});
+		}
+		for(var i=0; i<numJugadores; i++){
 
 			objetos.push({
 				x: 550, y:100,
