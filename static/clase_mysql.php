@@ -73,6 +73,10 @@
 		$res = mysql_query("Select id, email, password from usuarios");
 		while ($row = mysql_fetch_assoc($res)) {
 			$usuario = $row['email'];
+			echo $usuario;
+			echo $user;
+			echo $password;
+			echo $pass;
 			$password = $row['password'];
 			if($usuario==$user && $password==$pass){
 				return 1;

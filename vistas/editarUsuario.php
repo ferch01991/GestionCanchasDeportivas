@@ -13,20 +13,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
   <link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
   <link href="navbar.css" rel="stylesheet">
   <script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
-  <script language="javascript" type="text/javascript">
-    function validarEmail(){
-      with (document.forms['registro']){
-        if (email.value == email2.value){
-          document.forms['registro'].imgValidar.src='../imagenes/sistema/ok.png';
-          document.forms['registro'].botonEnviar.disabled=false;
-        }else{
-          document.forms['registro'].imgValidar.src='../imagenes/sistema/no.png';
-          document.forms['registro'].botonEnviar.disabled=true;
-        }
-      }
-    }
-  </script>
-</head>
+  </head>
 <body id="bodyEditarUsuario">
   <?php
   include("../static/menu1.php");
@@ -48,21 +35,22 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <form enctype="multipart/form-data" name="registro" action="../controladores/editarUsuario.php" method="POST">
       <div class="row">
         <div class="col-sm-6">
-          <input required type="text" class="form-control" placeholder="Nombres" name="nombres">
+          <?php echo "<input required type='text' class='form-control' placeholder=".$datos[1]." name='nombres'>" ?>
+          
         </div>
         <div class="col-sm-6">
-          <input required type="text" class="form-control" placeholder="Apellidos" name="apellidos">  
+          <?php echo "<input required type='text' class='form-control' placeholder=".$datos[2]." name='apellidos'>" ?>
         </div>
       </div>
       <div class="form-group">
         <br>
-        <input required type="email" class="form-control" placeholder="Correo electronico" name="email">
-        <img name="imgValidar" src="" WIDTH=20 WEIGTH=20>
-        <input required type="email"  class="form-control" placeholder="Vuelve a introducir tu correo" name="email2" onKeyup="validarEmail()">
-        <br>
         <input required type="password" class="form-control" placeholder="Contraseña" name="password">
         <br>
-        <input required type="text" class="form-control" placeholder="Acerca de ti" name="acerca">
+        <?php echo "<input required type='text' class='form-control' placeholder=".$datos[6]." name='telefono'>" ?>
+        <br>
+        <?php echo "<input required type='text' class='form-control' placeholder=".$datos[7]." name='direccion'>" ?>
+        <br>
+        <?php echo "<input required type='text' class='form-control' placeholder=".$datos[8]." name='acerca'>" ?>
         <br>
         <input required type="file" class="form-control" placeholder="" name="imagen">
         <?php echo "<input required type='hidden' class=form-'control' name='id' value=".$id.">    "?>
