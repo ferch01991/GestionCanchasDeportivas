@@ -20,6 +20,10 @@ include("../static/clase_mysql.php");
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
+  <link href="navbar.css" rel="stylesheet">
+  <script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
+
   <link rel="stylesheet" type="text/css" href="../estilos/estilos2.css"> 
 	<title>Mapa</title>
 	<section id="encabezado" style="background-image: url('../imagenes/fondos/header-sprite.png');background-repeat: no-repeat; ">
@@ -62,7 +66,7 @@ include("../static/clase_mysql.php");
 	</script>
 	</head>
      
-    <body  style="background-image: url('../imagenes/fondos/fondo3.jpg');background-repeat: no-repeat;"> 
+    <body  id="bodyMuro"> 
     	
      <div class="container">
      	<div class='row'>
@@ -71,9 +75,9 @@ include("../static/clase_mysql.php");
     	<?php
     		$miconexion->consulta("SELECT * FROM canchas WHERE id='1'");
             $datos=$miconexion->mapa();
-            echo "<h3>".$datos['1']."</h2>";
-       		echo "<p><h3>Dirección: </h3>".$datos['4']."</p>";
-        	echo "<p><h3>Capacidad de Jugadores: </h3>".$datos['5']."</p>";
+            echo "<h3 style='color: #fff;'>".$datos['1']."</h3>";
+       		echo "<p style='color: #fff;'><h3 style='color: #fff;'>Dirección:".$datos['4']." </h3></p>";
+        	echo "<p><h3 style='color: #fff;'>Capacidad de Jugadores: </h3>".$datos['5']."</p>";
         	echo "<div class='col-md-6'>";
          echo "<a href='../controladores/confirmar.php?tipo=aceptado&id=$datos[0]'<button type='submit' class='btn btn-default' style='background: #000000'; color:'#FFFFFF'><img align='left' src='../imagenes/sistema/ok.png' WIDTH=20 HEIGHT=20></button></a>";
          echo "</div>";
@@ -98,7 +102,4 @@ include("../static/clase_mysql.php");
         </div>
 
     </body>
-     <footer style="background-image: url('../imagenes/fondos/fondopie.jpg'); padding:10px; text-align:center; margin-right:-105px;margin-left:-106px">
-	<h4>Derechos reservados</h4>
-</footer>
     </html>

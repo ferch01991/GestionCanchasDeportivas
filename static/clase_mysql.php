@@ -1,3 +1,4 @@
+
 <?php
  class clase_mysql{
  	/*Variables para la conexion a la db*/
@@ -153,7 +154,22 @@
       return $datos; 
          
   }
-
+  function listajugadores(){
+    echo "<div id='derecha' align='center' style='float: right;height: 562px; margin: -630px 1em 1em;'>";
+    
+     echo "<div id='infoPartidos' style=' height: 520px;'>";
+    while (@$row = mysql_fetch_array($this->Consulta_ID)) {
+        @$id=$row['imagen'];
+ 		@$nombre=$row['nombres'];
+ 		echo "<img><img src='".$id."' WIDTH=100px HEIGHT=90px></>";
+     	 echo "<h5>".$nombre."</h5>";
+     	  echo "<hr>";
+ 		 
+      }
+       echo "</div>";  
+    
+  echo "</div>";
+  }
 	
 
 }
