@@ -184,6 +184,25 @@ class clase_mysql{
 		return $res;
 	}
 
+	function partidosUsuario($idUsuario){
+		$res = $this->consulta("select DISTINCT  g.nombre, c.nombre, p.fecha, p.hora from grupos g, canchas c, partidos p, usuarios_grupos u where g.id = p.id_grupo and p.id_cancha = c.id and u.id_usuario=".$idUsuario." ");
+		return $res;
+	}
+
+	function invitaciones($idUsuario){
+		$res = $this->consulta("SELECT * FROM invitaciones WHERE invitaciones.id_usuario =".$idUsuario." ");
+		return $res;
+	}
+
+	function datosGrupo($idGrupo){
+		$res = $this->consulta("SELECT nombre, logo FROM grupos WHERE grupos.id =".$idGrupo." ");
+		$grupo = array();
+		$row = mysql_fetch_row($res);
+		array_push($grupo, $row[0]);
+		array_push($grupo, $row[1]);
+		return $grupo;
+	}
+
 }
 
 
