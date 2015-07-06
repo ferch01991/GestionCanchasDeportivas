@@ -35,7 +35,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
       $resPartidos = $conexion->partidosUsuario($datos[0]);
       $cont = 0;
       while ($row = mysql_fetch_row($resPartidos)){
-        echo "<a href='../vistas/cancha.php?idPartido=$row[4]'>";
+        echo "<a href='../vistas/cancha.php?idPartido=$row[4]' target='blank'>";
         echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
         echo "</a>";
         echo "<hr>";

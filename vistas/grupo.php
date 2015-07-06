@@ -83,6 +83,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<input name="email" class="form-control" placeholder="Correo Electronico">
 				<br>
 				<?php echo "<input type='hidden' name='idGrupo' value =".$idGrupo." >"?>
+				<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
 				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Invitar</button></div>
 			</form>
 		</div>

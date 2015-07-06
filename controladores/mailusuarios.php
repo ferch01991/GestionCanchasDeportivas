@@ -8,7 +8,7 @@ $idUsuarioInvitado = $conexion->idUsuarioMail($email);
 
 if (!$idUsuarioInvitado){
 	$claveUsuarioInvitado = generarCodigo(8);
-	$sql = "INSERT INTO usuarios values ('','Perfil','Incompleto','$email','$claveUsuarioInvitado','','','','','../imagenes/usuarios/avatarHombre.jpg')";
+	$sql = "INSERT INTO usuarios values ('','Perfil','Incompleto','$email','$claveUsuarioInvitado','','','','','../imagenes/usuarios/avatarHombre.png')";
 	$conexion->ejecutar($sql);
 	$mensaje = "Hola ".$email." \nHas sido invitado a unirte al Sistema de Gestion de Canchas deportivas ingresa con estos datos \n usuario: ".$email."\n Contraseña: ".$claveUsuarioInvitado."";
 	$mensaje = wordwrap($mensaje, 70, "\r\n");
