@@ -1,73 +1,73 @@
 
 <?php
- class clase_mysql{
- 	/*Variables para la conexion a la db*/
- 	var $BaseDatos;
- 	var $Servidor;
- 	var $Usuario;
- 	var $Clave;
- 	/*Identificadores de conexion y consulta*/
- 	var $Conexion_ID = 0;
- 	var $Consulta_ID = 0;
- 	/*Numero de error y error de textos*/
- 	var $Errno = 0;
- 	var $Error = "";
- 	function clase_mysql(){
+class clase_mysql{
+	/*Variables para la conexion a la db*/
+	var $BaseDatos;
+	var $Servidor;
+	var $Usuario;
+	var $Clave;
+	/*Identificadores de conexion y consulta*/
+	var $Conexion_ID = 0;
+	var $Consulta_ID = 0;
+	/*Numero de error y error de textos*/
+	var $Errno = 0;
+	var $Error = "";
+	function clase_mysql(){
  		//cosntructor
- 	}
+	}
 
- 	function conectar($db, $host, $user, $pass){
- 		if($db!="") $this->BaseDatos = $db;
- 		if($host!="") $this->Servidor = $host;
- 		if($user!="") $this->Usuario = $user;
- 		if($pass!="") $this->Clave = $pass;
+	function conectar($db, $host, $user, $pass){
+		if($db!="") $this->BaseDatos = $db;
+		if($host!="") $this->Servidor = $host;
+		if($user!="") $this->Usuario = $user;
+		if($pass!="") $this->Clave = $pass;
 
  		//conectamos al servidor de db
- 		$this->Conexion_ID=mysql_connect($this->Servidor,$this->Usuario, $this->Clave);
- 		if(!$this->Conexion_ID){
- 			$this->Error="La conexion con el servidor fallida";
- 			return 0;
- 		}
+		$this->Conexion_ID=mysql_connect($this->Servidor,$this->Usuario, $this->Clave);
+		if(!$this->Conexion_ID){
+			$this->Error="La conexion con el servidor fallida";
+			return 0;
+		}
 
 		//Seleccionamos la base de datos
 		if(!mysql_select_db($this->BaseDatos, $this->Conexion_ID)){
 			$this->Error="Imposible abrir ".$this->BaseDatos;
- 			return 0;
+			return 0;
 		} 	
 		/*Si todo tiene exito, retorno el identificador de la conexion*/
- 		return $this->Conexion_ID;
- 	}	
+		return $this->Conexion_ID;
+	}	
 
  	//Ejecuta cualquier consulta
- 	function consulta($sql=""){
- 		if($sql==""){
- 			$this->Error="NO hay ningun sql";
- 			return 0;
- 		}
+	function consulta($sql=""){
+		if($sql==""){
+			$this->Error="NO hay ningun sql";
+			return 0;
+		}
  		//ejecutamos la consulta
- 		$this->Consulta_ID = mysql_query($sql, $this->Conexion_ID);
- 		if(!$this->Consulta_ID){
- 			$this->Errno = mysql_errno();
- 			$this->Error = mysql_error();
- 		}
+		$this->Consulta_ID = mysql_query($sql, $this->Conexion_ID);
+		if(!$this->Consulta_ID){
+			$this->Errno = mysql_errno();
+			$this->Error = mysql_error();
+		}
  		//retorna la consulta ejecutada
- 		return $this->Consulta_ID;
- 	}
+		return $this->Consulta_ID;
+	}
 
  	//Devulve el numero de campos de la culsulta
- 	function numcampos(){
- 		return @mysql_num_fields($this->Consulta_ID);
- 	}
+	function numcampos(){
+		return @mysql_num_fields($this->Consulta_ID);
+	}
 
  	//Devuleve el numero de registros de la culsulta
- 	function numregistros(){
- 		return @mysql_num_rows($this->Consulta_ID);
- 	}
+	function numregistros(){
+		return @mysql_num_rows($this->Consulta_ID);
+	}
 
  	//Devuelve el nombre de un campo de la consulta
- 	function nombrecampo($numcampo){
- 		return mysql_field_name($this->Consulta_ID, $numcampo);
- 	}
+	function nombrecampo($numcampo){
+		return mysql_field_name($this->Consulta_ID, $numcampo);
+	}
 
 
 	function autenticar($user, $pass){
@@ -134,58 +134,55 @@
 		return $idGrupo;
 	}
 
-	 function mapa(){
-  
+	function mapa(){
+
     //echo "<section class='contenedor'>";
-    $datos = array();
-    while (@$row = mysql_fetch_array($this->Consulta_ID)) {
-        array_push($datos, $row[0]);
-        array_push($datos, $row[1]);
-        array_push($datos, $row[2]);
-        array_push($datos, $row[3]);
-        array_push($datos, $row[4]);
-        array_push($datos, $row[5]);
+		$datos = array();
+		while (@$row = mysql_fetch_array($this->Consulta_ID)) {
+			array_push($datos, $row[0]);
+			array_push($datos, $row[1]);
+			array_push($datos, $row[2]);
+			array_push($datos, $row[3]);
+			array_push($datos, $row[4]);
+			array_push($datos, $row[5]);
 
-      }
-      return $datos; 
-         
-  }
+		}
+		return $datos; 
 
-  function listajugadores(){
-    echo "<div id='derecha' align='center' style='float: right;height: 562px; margin: -630px 1em 1em;'>";
-    
-     echo "<div id='infoPartidos' style=' height: 520px;'>";
-    while (@$row = mysql_fetch_array($this->Consulta_ID)) {
-        @$id=$row['imagen'];
- 		@$nombre=$row['nombres'];
- 		echo "<img><img src='".$id."' WIDTH=100px HEIGHT=90px></>";
-     	 echo "<h5>".$nombre."</h5>";
-     	  echo "<hr>";
- 		 
-      }
-       echo "</div>";  
-    
-  echo "</div>";
-  }
+	}
 
-  function selectcancha(){
-      $canchas = array();
-      $res = $this->consulta("select nombre from canchas");
-     while ($row = mysql_fetch_array($res)) { 
-          array_push($canchas, $row[0]);
-    }
-    return $canchas;
-  }
+	function listajugadores(){
+		echo "<div id='derecha' align='center' style='float: right;height: 562px; margin: -630px 1em 1em;'>";
 
-  function usuarios(){
-    $res = $this->consulta("select nombres, imagen from usuarios");
-    return $res;
-  }
+		echo "<div id='infoPartidos' style=' height: 520px;'>";
+		while (@$row = mysql_fetch_array($this->Consulta_ID)) {
+			@$id=$row['imagen'];
+			@$nombre=$row['nombres'];
+			echo "<img><img src='".$id."' WIDTH=100px HEIGHT=90px></>";
+			echo "<h5>".$nombre."</h5>";
+			echo "<hr>";
 
-  function partidos(){
-    $res = $this->consulta("select c.nombre, p.fecha, p.hora, p.resultado, p.observacion from partidos p, canchas c where p.id_grupo=1 and p.id_cancha = c.id");
-    return $res;
-  }
+		}
+		echo "</div>";  
+
+		echo "</div>";
+	}
+
+	function selectcancha(){
+		$canchas = array();
+		$res = $this->consulta("select id, nombre from canchas");
+		return $res;
+	}
+
+	function usuarios(){
+		$res = $this->consulta("select nombres, apellidos, imagen from usuarios");
+		return $res;
+	}
+
+	function partidos($idGrupo){
+		$res = $this->consulta("select c.nombre, p.fecha, p.hora, p.resultado, p.observacion from partidos p, canchas c where p.id_grupo=".$idGrupo." and p.id_cancha = c.id");
+		return $res;
+	}
 
 }
 

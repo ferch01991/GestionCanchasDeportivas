@@ -134,3 +134,8 @@ hr {border: 2px inset #eee; height: 1px; width: 80%;}
 	display: inline-block;
 	
 }
+
+label{
+	color: #FFF;
+	font: inherit;
+}
