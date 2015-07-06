@@ -75,21 +75,23 @@
 			?>
 		</div>
 		<div class="col-xs-6 col-md-4" id="centrar posicion">
-		    <form action="" class="form-horizontal">
+		    <form action="static/partido.php" class="form-horizontal" method="POST">
 		    	<div class="form-group">
+		    		<div class="form-group">	
 		    		<?php
 		    		$miconexion = new clase_mysql;
 					$miconexion->conectar($db_name,$db_host, $db_user,$db_password);
 		    		$canchas = $miconexion->selectcancha();
 		    		$numCanchas = count($canchas);
 		    		echo "<label>Cancha</label>";
-		    		echo "<select>";
-		    		echo "<option>Escoger cancha</option>";
+		    		echo "<select name='cancha'class='form-control'>";
+		    		echo "<option></option>";
 		    		for ($i=0; $i < $numCanchas; $i++) {
 		    			echo "<option>".$canchas[$i]."</option>";
 		    		}
 		    		echo "</select>";
 		    		?>
+		    		</div>
 		    		<div class="form-group">
 		    			<label>Fecha:</label>
 		    			<input type="date" name="fecha">
@@ -97,7 +99,11 @@
 		    		<div class="form-group">
 		    			<label>Hora:<input type="time" name="hora"></label>
 		    		</div>
-		    		
+		    		<div class="col-xs-2">
+		    			<label>EquipoA</label><input type="text" name="golesA" class="form-control"><br>
+		    			<input type="text" name="golesB" class="form-control"><label>EquipoB</label>
+		    			
+		    		</div>
 		    	<button type="submit" class="btn btn-default">Ingresar</button>
 		    	</div>
             </form>
