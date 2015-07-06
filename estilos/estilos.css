@@ -43,6 +43,8 @@
 	vertical-align: top;
 }
 
+
+
 #centro{
 	border: dotted;
 	padding: 1em;
@@ -61,6 +63,7 @@
 	vertical-align: top;
 }
 
+
 #imagenUsuario{
 	width: 140px;
 	height: 140px;
@@ -74,6 +77,9 @@
 }
 
 h4{
+	color: #FFFFFF;
+}
+h3{
 	color: #FFFFFF;
 }
 
@@ -90,6 +96,7 @@ h4{
 #infopartidos::-webkit-scrollbar { 
     display: none; 
 }
+
 
 hr {border: 2px inset #eee; height: 1px; width: 80%;}
 
