@@ -1,6 +1,6 @@
 <?php
-    include("static/site_config.php"); 
-    include("static/clase_mysql.php");
+    include("../static/site_config.php"); 
+    include("../static/clase_mysql.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,8 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Grupos</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+	
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 </head>
 <body>
