@@ -109,9 +109,10 @@ include("../static/clase_mysql.php");
 	<canvas width="840px" height="560" id="lienzo">No soporta canvas</canvas>
 	 <!--</section>-->
 	 <?php 
+	 extract($_GET);
 	 $conexion = new clase_mysql;
      $conexion->conectar($db_name,$db_host, $db_user,$db_password);
-     $conexion->consulta("select * from confirmaciones where id_partido=2 and estado='aceptado'");
+     $conexion->consulta("select * from confirmaciones where id_partido=".$idPartido." and estado='aceptado'");
      $l=$conexion->numregistros();
      echo "<p></p>";
     
@@ -130,12 +131,11 @@ include("../static/clase_mysql.php");
      	<?php
      		 $conexion = new clase_mysql;
     		 $conexion->conectar($db_name,$db_host, $db_user,$db_password);
-     		 $conexion->consulta("SELECT distinct u.imagen,u.nombres from usuarios u, confirmaciones c where (c.estado='aceptado' and c.id_partido=3)and u.id=c.id_usuario ");
+     		 $conexion->consulta("SELECT distinct u.imagen,u.nombres from usuarios u, confirmaciones c where (c.estado='aceptado' and c.id_partido='$idPartido')and u.id=c.id_usuario ");
      		 $l=$conexion->numregistros();
-     		 echo"<br>";
-     		 echo"<br>";
-     		 echo"<br>";
-     		 
+     		 echo "<br>";
+     		 echo "<br>";
+     		 echo "<br>";
      		 $datos=$conexion->listajugadores();
     
      	?>
