@@ -58,7 +58,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 					$resCanchas = $conexion->selectcancha();
 					echo "<option>-Seleccione una cancha-</option>";
 					while ($row = mysql_fetch_row($resCanchas)){
-						echo "<option>".$row[1]."</option>";
+						echo "<option value=".$row[0].">".$row[1]."</option>";
 						echo "<hr>";
 					}
 					?>
