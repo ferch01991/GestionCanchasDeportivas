@@ -32,28 +32,16 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <br>
     
     <div id="infoPartidos">
-      
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-      <hr>
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-      <hr>
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-      <hr>
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-      <hr>
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-      <hr>
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-      <h5>partidos</h5>
-
+      <?php
+      $resPartidos = $conexion->partidosUsuario($datos[0]);
+      $cont = 0;
+      while ($row = mysql_fetch_row($resPartidos)){
+        echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
+        echo "<hr>";
+        $cont = $cont+1;
+      }
+      ?>
     </div>  
-    
   </div>
   <div id="centro">
     <h4>Información BD</h4>
@@ -69,6 +57,24 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
         <?php echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
         <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
       </form>
+    </div>
+
+    <br>
+    <br>
+    <div>
+      <h4>Te han invitado a unirte</h4>
+      <?php
+      $resInvitaciones = $conexion->invitaciones($datos[0]);
+      while ($row = mysql_fetch_row($resInvitaciones)){
+        $grupo = $conexion->datosGrupo($row[0]);
+        echo "<div align='left' style='display: inline-block'><h5>".$grupo[0]."</h5></div>";
+        echo "<div align='right' style='display: inline-block'>";
+        echo "<button type='submit' class='btn btn-success btn-xs'>Aceptar</button>";
+        echo "<button type='submit' class='btn btn-danger btn-xs'>Rechazar</button>";
+        echo "</div>";
+        echo "<br>";
+      }
+      ?>
     </div>    
   </div>
   

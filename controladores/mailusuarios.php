@@ -1,11 +1,13 @@
 <?php
-$mail = $_POST['usuario'];
-$mensaje = "Línea 1\r\nLínea 2\r\nLínea 3";
+extract($_POST);
+$mensaje = "Chuchetumadre";
 $mensaje = wordwrap($mensaje, 70, "\r\n");
-$resultado = mail($mail, 'Mi título', $mensaje);
+$resultado = mail($email, 'Test', $mensaje);
 echo $resultado;
 if ($resultado) {
-		echo "mensaje enviado";
+	echo "mensaje enviado";
 		#header("location:../grupo.php");
-	}
+}else{
+	echo "no enviado";
+}
 ?>

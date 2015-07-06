@@ -51,27 +51,41 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	</div>
 
 	<div id="derecha">
-		<h4>Crea un Partido!</h4>
-		<form action="../controladores/crearPartido.php" method="POST">
-			<select required name="cancha" class="form-control" placeholder="Selecciona una cancha">
-				<?php
-				$resCanchas = $conexion->selectcancha();
-				echo "<option>-Seleccione una cancha-</option>";
-				while ($row = mysql_fetch_row($resCanchas)){
-					echo "<option value =".$row[0].">".$row[1]."</option>";
-				}
-				?>
-			</select>
-			<br>
-			<input required name="fecha" class="form-control" type="date" placeholder="Eliga una fecha">
-			<br>
-			<input required name="hora" class="form-control" type="time" placeholder="Eliga una hora">
-			<br>
-			<?php echo "<input required name='grupo' type='hidden' value=".$idGrupo.">"?>
-			<?php echo "<input required name='usuario' type='hidden' value=".$idUsuario.">"?>
-			<br>
-			<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
-		</form>
+		<div>
+			<h4>Crea un Partido!</h4>
+			<form action="../controladores/crearPartido.php" method="POST">
+				<select required name="cancha" class="form-control" placeholder="Selecciona una cancha">
+					<?php
+					$resCanchas = $conexion->selectcancha();
+					echo "<option>-Seleccione una cancha-</option>";
+					while ($row = mysql_fetch_row($resCanchas)){
+						echo "<option value =".$row[0].">".$row[1]."</option>";
+						echo "<hr>";
+					}
+					?>
+				</select>
+				<br>
+				<input required name="fecha" class="form-control" type="date" placeholder="Eliga una fecha">
+				<br>
+				<input required name="hora" class="form-control" type="time" placeholder="Eliga una hora">
+				<br>
+				<?php echo "<input required name='grupo' type='hidden' value=".$idGrupo.">"?>
+				<?php echo "<input required name='usuario' type='hidden' value=".$id.">"?>
+				<br>
+				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Crear Partido</button></div>
+			</form>
+		</div>
+		<br>
+		<li class="Separator"></li>
+		<br>
+		<div>
+			<h4>Invita un parce!</h4>
+			<form action="../controladores/mailusuarios.php" method="POST">
+				<input name="email" class="form-control" placeholder="Correo Electronico">
+				<br>
+				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Invitar</button></div>
+			</form>
+		</div>
 	</div>
 
 
