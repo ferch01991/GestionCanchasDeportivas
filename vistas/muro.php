@@ -63,6 +63,10 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <br>
     <div>
       <h4>Te han invitado a unirte</h4>
+      <label>Confirmar
+      <button type="button" class="btn btn-primary">Aceptar</button>
+      <button type="button" class="btn btn-danger">Rechazar</button>
+      </label>
       <?php
       $resInvitaciones = $conexion->invitaciones($datos[0]);
       while ($row = mysql_fetch_row($resInvitaciones)){
