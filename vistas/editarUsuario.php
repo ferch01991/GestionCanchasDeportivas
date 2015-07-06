@@ -16,9 +16,9 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
   </head>
 <body id="bodyEditarUsuario">
   <?php
-  include("../static/menu1.php");
   extract($_GET);
-  $datos = $conexion->datosUsuario($id);
+  include("../static/menu1.php");
+  $datos = $conexion->datosUsuario($idUsuario);
   ?>
   
   <div id="izquierda" align="center">
@@ -35,25 +35,25 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <form enctype="multipart/form-data" name="registro" action="../controladores/editarUsuario.php" method="POST">
       <div class="row">
         <div class="col-sm-6">
-          <?php echo "<input required type='text' class='form-control' placeholder=".$datos[1]." name='nombres'>" ?>
+          <?php echo "<input type='text' class='form-control' placeholder=".$datos[1]." name='nombres'>" ?>
           
         </div>
         <div class="col-sm-6">
-          <?php echo "<input required type='text' class='form-control' placeholder=".$datos[2]." name='apellidos'>" ?>
+          <?php echo "<input type='text' class='form-control' placeholder=".$datos[2]." name='apellidos'>" ?>
         </div>
       </div>
       <div class="form-group">
         <br>
-        <input required type="password" class="form-control" placeholder="Contraseña" name="password">
+        <input type="password" class="form-control" placeholder="Contraseña" name="password">
         <br>
-        <?php echo "<input required type='text' class='form-control' placeholder=".$datos[6]." name='telefono'>" ?>
+        <?php echo "<input type='text' class='form-control' placeholder=".$datos[6]." name='telefono'>" ?>
         <br>
-        <?php echo "<input required type='text' class='form-control' placeholder=".$datos[7]." name='direccion'>" ?>
+        <?php echo "<input type='text' class='form-control' placeholder=".$datos[7]." name='direccion'>" ?>
         <br>
-        <?php echo "<input required type='text' class='form-control' placeholder=".$datos[8]." name='acerca'>" ?>
+        <?php echo "<input type='text' class='form-control' placeholder=".$datos[8]." name='acerca'>" ?>
         <br>
         <input required type="file" class="form-control" placeholder="" name="imagen">
-        <?php echo "<input required type='hidden' class=form-'control' name='id' value=".$id.">    "?>
+        <?php echo "<input required type='hidden' class=form-'control' name='id' value=".$idUsuario.">    "?>
         
       </div>
       <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>

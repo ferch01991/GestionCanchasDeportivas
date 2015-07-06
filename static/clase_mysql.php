@@ -185,7 +185,7 @@ class clase_mysql{
 	}
 
 	function partidosUsuario($idUsuario){
-		$res = $this->consulta("select DISTINCT  g.nombre, c.nombre, p.fecha, p.hora from grupos g, canchas c, partidos p, usuarios_grupos u where g.id = p.id_grupo and p.id_cancha = c.id and u.id_usuario=".$idUsuario." ");
+		$res = $this->consulta("select DISTINCT  g.nombre, c.nombre, p.fecha, p.hora, p.id from grupos g, canchas c, partidos p, usuarios_grupos u where g.id = p.id_grupo and p.id_cancha = c.id and u.id_usuario=".$idUsuario." ");
 		return $res;
 	}
 
@@ -201,6 +201,15 @@ class clase_mysql{
 		array_push($grupo, $row[0]);
 		array_push($grupo, $row[1]);
 		return $grupo;
+	}
+
+	function idUsuarioMail($email){
+		$res = $this->consulta("SELECT id FROM usuarios WHERE usuarios.email ='".$email."' ");
+		$id = 0;
+		while ($row = mysql_fetch_row($res)){
+			$id =  $row[0];
+		}
+		return $id;
 	}
 
 }

@@ -18,5 +18,5 @@ $sql = "UPDATE usuarios
 		WHERE id = '$id'";
 $conexion->ejecutar($sql);
 chmod($imagenUsuario, 0755); 
-header("location:../vistas/muro.php?id=$id");
+header("location:../vistas/muro.php?idUsuario=$id");
 ?>

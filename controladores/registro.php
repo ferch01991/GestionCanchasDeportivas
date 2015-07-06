@@ -13,5 +13,5 @@ $sql = "INSERT INTO usuarios VALUES('','$nombres','$apellidos',	'$email', '$pass
 $conexion->ejecutar($sql);
 $sql = "select id from usuarios where email ='".$email."'";
 $id = $conexion->sacarId($sql);
-header("location:../vistas/muro.php?id=$id");
+header("location:../vistas/muro.php?idUsuario=$id");
 ?>

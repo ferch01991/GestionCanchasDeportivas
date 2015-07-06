@@ -1,6 +1,7 @@
 <?php 
 include ("../static/site_config.php");
 include ("../static/clase_mysql.php");
+<<<<<<< HEAD
 $cancha = $_POST['cancha'];
 $fecha = $_POST['fecha'];
 $hora = $_POST['hora'].":00";
@@ -15,3 +16,12 @@ extract($_POST);
 	header("location:../vistas/grupo.php?idGrupo=".$grupo."&idUsuario=".$usuario."");
 
  ?>
+=======
+$conexion = new clase_mysql;
+$conexion->conectar($db_name,$db_host, $db_user,$db_password);
+extract($_POST);
+$sql = "INSERT INTO partidos VALUES ('','$idGrupo','$cancha','$fecha','$hora','','')";
+$conexion->ejecutar($sql);	
+header("location:../vistas/grupo.php?idGrupo=".$idGrupo."&idUsuario=".$idUsuario."");
+?>
+>>>>>>> 11e3e2df924e59e744afe12cada14b8721bd6b88
