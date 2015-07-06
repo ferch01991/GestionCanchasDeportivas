@@ -23,6 +23,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	<div id="izquierda" align="center">
 		<div>
 			<?php
+			
 			$usuarios = $conexion->usuarios();
 			while ($row = mysql_fetch_row($usuarios)) {
 				echo "<label>".$row[0]." ".$row[1]."</label>";
@@ -65,6 +66,9 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 			<input required name="fecha" class="form-control" type="date" placeholder="Eliga una fecha">
 			<br>
 			<input required name="hora" class="form-control" type="time" placeholder="Eliga una hora">
+			<br>
+			<?php echo "<input required name='grupo' type='hidden' value=".$idGrupo.">"?>
+			<?php echo "<input required name='usuario' type='hidden' value=".$idUsuario.">"?>
 			<br>
 			<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
 		</form>
