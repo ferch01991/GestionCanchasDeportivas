@@ -135,8 +135,6 @@ class clase_mysql{
 	}
 
 	function mapa(){
-
-    //echo "<section class='contenedor'>";
 		$datos = array();
 		while (@$row = mysql_fetch_array($this->Consulta_ID)) {
 			array_push($datos, $row[0]);
@@ -226,6 +224,7 @@ class clase_mysql{
 		return $res;
 	}
 
+
 	function idPartido($idGrupo, $idCancha, $fecha, $hora){
 		$res = $this->consulta("SELECT partidos.id FROM partidos WHERE partidos.id_grupo = $idGrupo AND partidos.id_cancha = $idCancha AND partidos.fecha = '$fecha' AND partidos.hora = '$hora' ");
 		$idPartido = 0;
@@ -239,6 +238,7 @@ class clase_mysql{
 		$res = $this->consulta("SELECT DISTINCT grupos.nombre, canchas.nombre, partidos.fecha, partidos.hora, partidos.id FROM grupos, canchas, partidos, usuarios, confirmaciones ");
 		return $res;
 	}
+
 
 }
 

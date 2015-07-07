@@ -10,6 +10,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Grupos</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -77,7 +78,9 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<?php echo "<input required name='idGrupo' type='hidden' value=".$idGrupo.">"?>
 				<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
 				<br>
-				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Crear Partido</button></div>
+				<div align="center">
+					<button name="botonEnviar" type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">Crear Partido</button>
+				</div>
 			</form>
 		</div>
 		<br>
@@ -98,6 +101,8 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.js"></script>
+	<script src="../bootstrap/js/npm.js"></script>
 	<script src="../bootstrap/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
