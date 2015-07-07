@@ -203,15 +203,19 @@ class clase_mysql{
 		return $grupo;
 	}
 
-	function idUsuarioMail($email){
-		$res = $this->consulta("SELECT id FROM usuarios WHERE usuarios.email ='".$email."' ");
-		$id = 0;
-		while ($row = mysql_fetch_row($res)){
-			$id =  $row[0];
+	function controlCancha($cancha, $fecha, $hora){
+		$res = $this->consulta("select p.id_cancha, p.fecha, p.hora from partidos p 
+								where p.id_cancha = '".$cancha."' and p.fecha = '".$fecha."' and hora = '".$hora."'");
+		$datos = array();
+		while ($row = mysql_fetch_array($res)) {
+			array_push($datos, $row[0]);
+			array_push($datos, $row[1]);
+			array_push($datos, $row[2]);
 		}
-		return $id;
+		return count($datos);		
 	}
 
+<<<<<<< HEAD
 	function invitacionesPartido($idUsuario){
 		$res = $this->consulta("SELECT * FROM confirmaciones WHERE confirmaciones.id_usuario = $idUsuario AND confirmaciones.estado = 'pendiente'");
 		return $res;
@@ -221,6 +225,8 @@ class clase_mysql{
 		$res = $this->consulta("SELECT grupos.nombre, canchas.nombre, partidos.fecha, partidos.hora  FROM grupos, canchas, partidos WHERE partidos.id = $idPartido AND partidos.id_grupo = grupos.id AND partidos.id_cancha = canchas.id");
 		return $res;
 	}
+=======
+>>>>>>> 102f47f2eddad1627ecd9a48813b34db2d5655f0
 
 }
 
