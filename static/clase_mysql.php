@@ -203,14 +203,18 @@ class clase_mysql{
 		return $grupo;
 	}
 
-	function idUsuarioMail($email){
-		$res = $this->consulta("SELECT id FROM usuarios WHERE usuarios.email ='".$email."' ");
-		$id = 0;
-		while ($row = mysql_fetch_row($res)){
-			$id =  $row[0];
+	function controlCancha($cancha, $fecha, $hora){
+		$res = $this->consulta("select p.id_cancha, p.fecha, p.hora from partidos p 
+								where p.id_cancha = '".$cancha."' and p.fecha = '".$fecha."' and hora = '".$hora."'");
+		$datos = array();
+		while ($row = mysql_fetch_array($res)) {
+			array_push($datos, $row[0]);
+			array_push($datos, $row[1]);
+			array_push($datos, $row[2]);
 		}
-		return $id;
+		return count($datos);		
 	}
+
 
 }
 

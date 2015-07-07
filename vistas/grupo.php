@@ -66,7 +66,13 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<br>
 				<input required name="fecha" class="form-control" type="date" placeholder="Eliga una fecha">
 				<br>
-				<input required name="hora" class="form-control" type="time" placeholder="Eliga una hora">
+				<select required name="hora" class="form-control">
+					<?php
+					for ($i=8; $i <= 24; $i++) { 
+						echo "<option value=".$i.':00:00'.">".$i.":00:00</option>";
+					}
+					?>
+				</select>
 				<br>
 				<?php echo "<input required name='idGrupo' type='hidden' value=".$idGrupo.">"?>
 				<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
