@@ -215,7 +215,7 @@ class clase_mysql{
 		return count($datos);		
 	}
 
-<<<<<<< HEAD
+
 	function invitacionesPartido($idUsuario){
 		$res = $this->consulta("SELECT * FROM confirmaciones WHERE confirmaciones.id_usuario = $idUsuario AND confirmaciones.estado = 'pendiente'");
 		return $res;
@@ -225,8 +225,7 @@ class clase_mysql{
 		$res = $this->consulta("SELECT grupos.nombre, canchas.nombre, partidos.fecha, partidos.hora  FROM grupos, canchas, partidos WHERE partidos.id = $idPartido AND partidos.id_grupo = grupos.id AND partidos.id_cancha = canchas.id");
 		return $res;
 	}
-=======
->>>>>>> 102f47f2eddad1627ecd9a48813b34db2d5655f0
+
 
 }
 

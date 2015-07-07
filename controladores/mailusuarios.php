@@ -12,9 +12,7 @@ if (!$idUsuarioInvitado){
 	$conexion->ejecutar($sql);
 	$mensaje = "Hola ".$email." \nHas sido invitado a unirte al Sistema de Gestion de Canchas deportivas ingresa con estos datos \n usuario: ".$email."\n Contraseña: ".$claveUsuarioInvitado."";
 	$mensaje = wordwrap($mensaje, 70, "\r\n");
-	$resultado = mail($email, 'Test', $mensaje);
-
-	
+	$resultado = mail($email, 'Test', $mensaje);	
 }
 
 $idUsuarioInvitado = $conexion->idUsuarioMail($email);
