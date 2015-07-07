@@ -184,8 +184,8 @@ class clase_mysql{
 		return $res;
 	}
 
-	function partidosUsuario($idUsuario){
-		$res = $this->consulta("select DISTINCT  g.nombre, c.nombre, p.fecha, p.hora, p.id from grupos g, canchas c, partidos p, usuarios_grupos u where g.id = p.id_grupo and p.id_cancha = c.id and u.id_usuario=".$idUsuario." ");
+	function partidosUsuario($idUsuario, $estado){
+		$res = $this->consulta("SELECT DISTINCT grupos.nombre, canchas.nombre, partidos.fecha, partidos.hora, partidos.id FROM grupos, canchas, partidos, usuarios, confirmaciones WHERE grupos.id = partidos.id_grupo AND partidos.id_cancha = canchas.id AND usuarios.id = $idUsuario AND confirmaciones.id_usuario = usuarios.id AND confirmaciones.estado = '$estado' AND confirmaciones.id_partido = partidos.id ");
 		return $res;
 	}
 
@@ -226,6 +226,19 @@ class clase_mysql{
 		return $res;
 	}
 
+	function idPartido($idGrupo, $idCancha, $fecha, $hora){
+		$res = $this->consulta("SELECT partidos.id FROM partidos WHERE partidos.id_grupo = $idGrupo AND partidos.id_cancha = $idCancha AND partidos.fecha = '$fecha' AND partidos.hora = '$hora' ");
+		$idPartido = 0;
+		while ($row = mysql_fetch_row($res)){
+			$idPartido = $row[0];
+		}
+		return $idPartido;
+	}
+
+	function infoBD(){
+		$res = $this->consulta("SELECT DISTINCT grupos.nombre, canchas.nombre, partidos.fecha, partidos.hora, partidos.id FROM grupos, canchas, partidos, usuarios, confirmaciones ");
+		return $res;
+	}
 
 }
 

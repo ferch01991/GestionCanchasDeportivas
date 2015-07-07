@@ -32,12 +32,12 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <a href=""></a>
     <div id="infoPartidos">
       <?php
-      $resPartidos = $conexion->partidosUsuario($datos[0]);
+      $resPartidos = $conexion->partidosUsuario($datos[0], "aceptado");
       while ($row = mysql_fetch_row($resPartidos)){
         echo "<a href='../vistas/cancha.php?idPartido=$row[4]' target='blank'>";
         echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
         echo "</a>";
-        echo "<a href='../controladores/abandonarPartido.php?idUsuario=$datos[0]&idPartido=$row[4]'>Ya no juego :/</a>";
+        echo "<a href='../controladores/gestionarPartido.php?idUsuario=$datos[0]&idPartido=$row[4]&op=3'>Ya no juego :/</a>";
         echo "<hr>";
       }
       ?>
@@ -45,6 +45,13 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
   </div>
   <div id="centro">
     <h4>Información BD</h4>
+    <?php 
+    $resInfo = $conexion->infoBD();
+    while ($info = mysql_fetch_row($resInfo)){
+      echo "<h5 style='color: #56FA00'>".$info[0]." ".$info[1]." ".$info[2]." ".$info[3]."</h5>";
+      echo "<br>";
+    }
+    ?>
   </div>
   <div id="derecha">
     <div>
@@ -62,18 +69,17 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     </div>
 
     <br>
-    <br>
     <div>
       <h4>Partidos Nuevos:</h4>
-      <div>
+      <div id="infoPartidos1">
         <?php
-        $resInvitaciones = $conexion->invitacionesPartido($idUsuario);
-        while ($invitacion = mysql_fetch_row($resInvitaciones)){
-          $resPartido = $conexion->informacionPartido($invitacion[1]);
-          while ($partido = mysql_fetch_row($resPartido)){
-            echo $partido[0]." ".$partido[1]." ".$partido[2]." ".$partido[3]."";
-            echo "<br>";
-          }
+        $resPartidos = $conexion->partidosUsuario($datos[0], "pendiente");
+        while ($row = mysql_fetch_row($resPartidos)){
+          echo "<h5>";
+          echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
+          echo "</h5>";
+          echo "<div align='center'><a href='../vistas/mapa.php?nombreCancha=$row[1]&idUsuario=$datos[0]&idPartido=$row[4]&op=2'>Hagale! </a></div>";
+          echo "<hr>";
         }
         ?>
       </div>
