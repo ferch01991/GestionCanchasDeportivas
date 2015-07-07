@@ -37,6 +37,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
         echo "<a href='../vistas/cancha.php?idPartido=$row[4]' target='blank'>";
         echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
         echo "</a>";
+        echo "<a href='../controladores/abandonarPartido.php?idUsuario=$datos[0]&idPartido=$row[4]'>Ya no juego :/</a>";
         echo "<hr>";
       }
       ?>
