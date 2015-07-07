@@ -15,5 +15,5 @@ $idGrupo = $conexion->idGrupo($nombre, $idUsuario);
 $sql = "INSERT INTO usuarios_grupos VALUES ('$idUsuario','$idGrupo','$fecha')";
 $conexion->ejecutar($sql);
 
-header("location:../vistas/muro.php?id=$idUsuario");
+header("location:../vistas/muro.php?idUsuario=$idUsuario");
 ?>

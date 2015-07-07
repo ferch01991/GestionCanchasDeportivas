@@ -76,7 +76,7 @@
 	display:list-item;
 }
 
-h4{
+h4, h3, h5{
 	color: #FFFFFF;
 }
 h3{
@@ -133,4 +133,17 @@ hr {border: 2px inset #eee; height: 1px; width: 80%;}
 	width: 20%;
 	display: inline-block;
 	
+}
+
+label{
+	color: #FFF;
+	font: inherit;
+}
+
+#invitacion{
+	position: absolute;
+	color: #fff;
+	width: 60%;
+	padding: 5em;
+	margin: 5em;
 }

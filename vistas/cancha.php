@@ -9,21 +9,21 @@ include("../static/clase_mysql.php");
 	<title>Cancha</title>
 	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
-  <link href="navbar.css" rel="stylesheet">
-  <script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
+	<link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
+	<link href="navbar.css" rel="stylesheet">
+	<script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
 
-		
-<script type="text/javascript">
-		var cv, cx, objetos, objetoActual=null;
-		var inicioX=0, inicioY=0;
-		var img = new Image();
-			img.src = "../imagenes/fondos/campo_futbol.jpg";
+	
+	<script type="text/javascript">
+	var cv, cx, objetos, objetoActual=null;
+	var inicioX=0, inicioY=0;
+	var img = new Image();
+	img.src = "../imagenes/fondos/campo_futbol.jpg";
 
 
-		function actualizar(){
-			cx.drawImage(img, 0, 0);
-			cx.textAlign='center';
+	function actualizar(){
+		cx.drawImage(img, 0, 0);
+		cx.textAlign='center';
 		for(var i =0; i<objetos.length;i++){
 			cx.fillStyle = objetos[i].color;
 			cx.fillRect(objetos[i].x,objetos[i].y,objetos[i].width,objetos[i].height);
@@ -58,47 +58,47 @@ include("../static/clase_mysql.php");
 
 
 
-		function imgCanvas(){
-			
-			cv = document.getElementById('lienzo');
-			cx = cv.getContext('2d');
-
-			function dibujar(res){
+	function imgCanvas(){
 		
+		cv = document.getElementById('lienzo');
+		cx = cv.getContext('2d');
+
+		function dibujar(res){
+			
+		}
+
+		
+
+		
+		actualizar();
+		
+
+		cv.onmousedown =function(event){
+			for(var i=0;  i<objetos.length; i++){
+				if(objetos[i].x<event.clientX && (objetos[i].width+objetos[i].x>event.clientX) && objetos[i].y<event.clientY && (objetos[i].height+objetos[i].y>event.clientY)){
+					objetoActual = objetos[i];
+					inicioY = event.clientY-objetos[i].y;
+					inicioX = event.clientX-objetos[i].x;
+					break;
+
+
+				}
 			}
 
-		
-
-			
-			actualizar();
-			
-
-			cv.onmousedown =function(event){
-				for(var i=0;  i<objetos.length; i++){
-					if(objetos[i].x<event.clientX && (objetos[i].width+objetos[i].x>event.clientX) && objetos[i].y<event.clientY && (objetos[i].height+objetos[i].y>event.clientY)){
-						objetoActual = objetos[i];
-						inicioY = event.clientY-objetos[i].y;
-						inicioX = event.clientX-objetos[i].x;
-						break;
-
-
-					}
-				}
-
-			};
-			cv.onmousemove = function(event){
-				if (objetoActual!=null) {
-					objetoActual.x=event.clientX - inicioX;
-					objetoActual.y = event.clientY - inicioY;
-					actualizar();
-				}
-				
-			};
-			cv.onmouseup = function(event){
-				objetoActual=null;
-			};
-
 		};
+		cv.onmousemove = function(event){
+			if (objetoActual!=null) {
+				objetoActual.x=event.clientX - inicioX;
+				objetoActual.y = event.clientY - inicioY;
+				actualizar();
+			}
+			
+		};
+		cv.onmouseup = function(event){
+			objetoActual=null;
+		};
+
+	};
 
 
 	</script>
@@ -107,39 +107,39 @@ include("../static/clase_mysql.php");
 <body id="bodyMuro" onload=" imgCanvas()" >
 	
 	<canvas width="840px" height="560" id="lienzo">No soporta canvas</canvas>
-	 <!--</section>-->
-	 <?php 
-	 $conexion = new clase_mysql;
-     $conexion->conectar($db_name,$db_host, $db_user,$db_password);
-     $conexion->consulta("select * from confirmaciones where id_partido=2 and estado='aceptado'");
-     $l=$conexion->numregistros();
-     echo "<p></p>";
-    
-     
-            ?> 
-            <script language="javascript"> 
-            var a= "<?php echo $l; ?>" ;
-                 
-                    dibujar(a); 
-            </script> 
-     
-            <?php 
-        
-     ?> 
+	<!--</section>-->
+	<?php 
+	extract($_GET);
+	$conexion = new clase_mysql;
+	$conexion->conectar($db_name,$db_host, $db_user,$db_password);
+	$conexion->consulta("select * from confirmaciones where id_partido=".$idPartido." and estado='aceptado'");
+	$l=$conexion->numregistros();
+	echo "<p></p>";
+	
+	
+	?> 
+	<script language="javascript"> 
+	var a= "<?php echo $l; ?>" ;
+	
+	dibujar(a); 
+	</script> 
+	
+	<?php 
+	
+	?> 
 
-     	<?php
-     		 $conexion = new clase_mysql;
-    		 $conexion->conectar($db_name,$db_host, $db_user,$db_password);
-     		 $conexion->consulta("SELECT distinct u.imagen,u.nombres from usuarios u, confirmaciones c where (c.estado='aceptado' and c.id_partido=3)and u.id=c.id_usuario ");
-     		 $l=$conexion->numregistros();
-     		 echo"<br>";
-     		 echo"<br>";
-     		 echo"<br>";
-     		 
-     		 $datos=$conexion->listajugadores();
-    
-     	?>
-    
-     
+	<?php
+	$conexion = new clase_mysql;
+	$conexion->conectar($db_name,$db_host, $db_user,$db_password);
+	$conexion->consulta("SELECT distinct u.imagen,u.nombres from usuarios u, confirmaciones c where (c.estado='aceptado' and c.id_partido='$idPartido')and u.id=c.id_usuario ");
+	$l=$conexion->numregistros();
+	echo "<br>";
+	echo "<br>";
+	echo "<br>";
+	$datos=$conexion->listajugadores();
+	
+	?>
+	
+	
 </body>
 </html>
