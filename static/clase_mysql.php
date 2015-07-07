@@ -212,6 +212,16 @@ class clase_mysql{
 		return $id;
 	}
 
+	function invitacionesPartido($idUsuario){
+		$res = $this->consulta("SELECT * FROM confirmaciones WHERE confirmaciones.id_usuario = $idUsuario AND confirmaciones.estado = 'pendiente'");
+		return $res;
+	}
+
+	function informacionPartido($idPartido){
+		$res = $this->consulta("SELECT grupos.nombre, canchas.nombre, partidos.fecha, partidos.hora  FROM grupos, canchas, partidos WHERE partidos.id = $idPartido AND partidos.id_grupo = grupos.id AND partidos.id_cancha = canchas.id");
+		return $res;
+	}
+
 }
 
 

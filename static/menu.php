@@ -9,7 +9,7 @@
 					<input required name="usuario" type="email" class="form-control" placeholder="E-mail">
 					<input required name="password" type="password" class="form-control" placeholder="Contraseña">
 				</div>
-				<button type="submit" class="btn btn-default">Ingresar</button>
+				<button type="submit" class="btn btn-success">Ingresar</button>
 			</form>
 		</div>
 	</div>

@@ -13,18 +13,14 @@ if (!$idUsuarioInvitado){
 	$mensaje = "Hola ".$email." \nHas sido invitado a unirte al Sistema de Gestion de Canchas deportivas ingresa con estos datos \n usuario: ".$email."\n Contraseña: ".$claveUsuarioInvitado."";
 	$mensaje = wordwrap($mensaje, 70, "\r\n");
 	$resultado = mail($email, 'Test', $mensaje);
-	echo $resultado;
-	if ($resultado) {
-		echo "mensaje enviado";
 
-	}else{
-		echo "no enviado";
-	}
-	header("location:../vistas/grupo.php?idGrupo=".$idGrupo."&idUsuario=".$idUsuario."");
-}else{
-	$sql = "INSERT INTO invitaciones values ('$idGrupo','$idUsuarioInvitado')";
-	header("location:../vistas/grupo.php?idGrupo=".$idGrupo."&idUsuario=".$idUsuario."");
+	
 }
+
+$idUsuarioInvitado = $conexion->idUsuarioMail($email);
+$sql = "INSERT INTO invitaciones values ('$idGrupo','$idUsuarioInvitado')";
+$conexion->ejecutar($sql);
+header("location:../vistas/grupo.php?idGrupo=".$idGrupo."&idUsuario=".$idUsuario."");
 
 function generarCodigo($longitud) {
 	$key = '';

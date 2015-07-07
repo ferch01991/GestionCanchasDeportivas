@@ -10,6 +10,6 @@ if ($resultado == 0){
 }else{
 	$sql = "select id from usuarios where email ='".$usuario."'";
 	$id = $conexion->sacarId($sql);
-	header("location:../vistas/muro.php?id=$id");
+	header("location:../vistas/muro.php?idUsuario=$id");
 }
 ?>

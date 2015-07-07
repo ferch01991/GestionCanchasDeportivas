@@ -139,3 +139,11 @@ label{
 	color: #FFF;
 	font: inherit;
 }
+
+#invitacion{
+	position: absolute;
+	color: #fff;
+	width: 60%;
+	padding: 5em;
+	margin: 5em;
+}
