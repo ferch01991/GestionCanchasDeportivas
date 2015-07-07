@@ -25,8 +25,8 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 			<?php
 			$usuarios = $conexion->usuarios($idGrupo);
 			while ($row = mysql_fetch_row($usuarios)) {
-				echo "<label>".$row[0]." ".$row[1]."</label>";
-				echo "<img src='".$row[2]."' alt='' width='20' height='20'>";
+				echo "<label>".$row[0]." ".$row[2]."</label>";
+				echo "<img src='".$row[1]."' alt='' width='20' height='20'>";
 				echo "<br>";					
 			}
 			?>

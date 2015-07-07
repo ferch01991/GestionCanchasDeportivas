@@ -174,8 +174,8 @@ class clase_mysql{
 		return $res;
 	}
 
-	function usuarios(){
-		$res = $this->consulta("select nombres, apellidos, imagen from usuarios");
+	function usuarios($idGrupo){
+		$res = $this->consulta("SELECT usuarios.nombres, usuarios.imagen, usuarios.apellidos, usuarios.id FROM usuarios, usuarios_grupos WHERE usuarios_grupos.id_grupo = $idGrupo AND usuarios.id = usuarios_grupos.id_usuario");
 		return $res;
 	}
 
