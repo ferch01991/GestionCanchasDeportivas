@@ -154,7 +154,7 @@
       return $datos; 
          
   }
-<<<<<<< HEAD
+
   function listajugadores(){
     echo "<div id='derecha' align='center' style='float: right;height: 562px; margin: -630px 1em 1em;'>";
     
@@ -171,7 +171,7 @@
     
   echo "</div>";
   }
-=======
+
   function selectcancha(){
       $canchas = array();
       $res = $this->consulta("select nombre from canchas");
@@ -191,7 +191,7 @@
     return $res;
   }
 
->>>>>>> 4f20b5091ad5b31dec873ca01ccf4bdb61d4b162
+
 	
 
 }
