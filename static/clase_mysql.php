@@ -123,6 +123,12 @@ class clase_mysql{
 		}
 		return $datos;
 	}
+	function grupo_chat($id_grupo){
+		$res = $this->consulta("SELECT nombre FROM grupos WHERE id = '".$id_grupo."'");
+		while ($row = mysql_fetch_row($res)){
+			return $row[0];
+		}
+	}
 
 	function idGrupo($nombre, $idUsuario){
 		$sql = "SELECT id FROM grupos WHERE nombre ='".$nombre."'";
@@ -249,6 +255,16 @@ class clase_mysql{
 		}
 		return $r;
 	}
+
+	function chat($id_grupo,$id_user, $sms){
+    $res = $this->consulta("insert into chat (id_grupo, id_usuario, mensaje) values ('".$id_grupo."', '".$id_usuario."','$sms')");
+    return $res;
+  }
+  function conversacion($id_grupo){
+    $res = $this->consulta("select id_usuario, mensaje from chat where id_grupo = '".$id_grupo."' order by id_chat asc");
+    return $res;
+
+  }
 
 }
 

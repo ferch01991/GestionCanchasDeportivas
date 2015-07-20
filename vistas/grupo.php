@@ -13,7 +13,6 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
-	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 </head>
 <body id="bodyMuro">
 	<?php
@@ -78,15 +77,11 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<br>
 				<?php echo "<input required name='idGrupo' type='hidden' value=".$idGrupo.">"?>
 				<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
-				<br>
 				<div align="center">
 					<button name="botonEnviar" type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">Crear Partido</button>
 				</div>
 			</form>
 		</div>
-		<br>
-		<li class="Separator"></li>
-		<br>
 		<div>
 			<h4>Invita un parce!</h4>
 			<form action="../controladores/mailusuarios.php" method="POST">
@@ -97,13 +92,73 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Invitar</button></div>
 			</form>
 		</div>
+		<div class="row">
+			<form id="formChat" role="form">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<?php
+					$grupo = $conexion->grupo_chat($_GET['idGrupo']);
+					echo "<h3 class='panel-title'>".$grupo."</h3>";
+					?>
+				</div>
+				<div class="panel-body">
+					<div id="conversacion" style="height: 80px; border: 1px solid #CCCCCC; padding: 12p%; border-radius: 5px; overflow-x: hidden;">
+					</div>
+					<?php echo "<input type='hidden' name='idGrupo' value =".$_GET['idGrupo']." >"?>
+					<?php echo "<input required name='idUsuario' type='hidden' value=".$_GET['idUsuario'].">"?>
+					<div class="panel-footer">
+						<div class="input-group">
+							<input type="text" class="form-control" id="mensaje" name="mensaje">
+							<span class="input-group-btn">
+								<button id="enviar" class="btn btn-primary" type="button">Enviar</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
 	</div>
 
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.js"></script>
-	<script src="../bootstrap/js/npm.js"></script>
-	<script src="../bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>
+		$(document).on("ready", function(){
+			registrarMensaje();
+			$.ajaxSetup({"cache":false});
+			setInterval("loadLdMessages()",200);
+		});
+
+		var registrarMensaje = function(){
+			$("#enviar").on("click", function(evento){
+				evento.preventDefault();
+				var frm = $("#formChat").serialize();
+				$.ajax({
+					type: "POST",
+					url: "../controladores/registro_chat.php",
+					data: frm
+				}).done(function(info){
+					var altura = $("#conversacion").prop("scrollHeight");
+					$("#conversacion").scrollTop(altura);
+					console.log(info);
+				})
+			});
+		}
+		var loadLdMessages = function(){
+			var frm = $("#formChat").serialize();
+			$.ajax({
+				type: "POST",
+				url: "../controladores/conversacion.php",
+				data: frm
+			}).done(function(info){
+				$("#conversacion").html( info );
+				$("#conversacion p:last-child").css({"background-color":"lightgreen", "padding-botton":"20px"});
+				var altura = $("#conversation").prop("scrollHeight");
+				$("#conversacion").scrollTop(altura);
+				console.log(info);
+			});
+		}	
+	</script>
 </body>
 </html>

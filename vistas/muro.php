@@ -11,8 +11,6 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
   <title>Sistema Canchas</title>
   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
-  <link href="navbar.css" rel="stylesheet">
-  <script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
 </head>
 <body id="bodyMuro">
   <?php
@@ -92,6 +90,5 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="../bootstrap/js/bootstrap.min.js"></script>
-  <script src="../bootstrap/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
