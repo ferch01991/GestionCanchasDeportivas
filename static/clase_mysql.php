@@ -114,6 +114,7 @@ class clase_mysql{
 		return $datos;
 	}
 
+
 	function gruposUsuario($id){
 		$sql = "SELECT nombre FROM grupos WHERE id_creador = ".$id."";
 		$datos = array();
@@ -248,6 +249,34 @@ class clase_mysql{
 			$r = $row[0];
 		}
 		return $r;
+	}
+
+	function comentariosGrupo($idGrupo){
+		$res = $this->consulta("SELECT * FROM comentarios WHERE idGrupo= '$idGrupo'");
+		while ($row = mysql_fetch_row($res)){
+			$usuario = $this->datosUsuario($row[1]);
+			echo "<img src='".$usuario[9]."' alt='' width='30' height='30'>";
+			echo "<label>".$usuario[1]." ".$row[5]."</label>";
+			echo "<h5>".$row[3]."</h5>";
+			if ($row[4]){
+				echo "<img src='".$row[4]."' alt='' width='300' height='300'>";	
+			}
+			echo "<hr>";
+		}
+	}
+
+	function comentariosMuro($idUsuario){
+		$res = $this->consulta("SELECT * FROM comentarios, usuarios_grupos WHERE comentarios.idGrupo = usuarios_grupos.id_grupo AND usuarios_grupos.id_usuario = 1");
+		while ($row = mysql_fetch_row($res)){
+			$usuario = $this->datosUsuario($row[1]);
+			echo "<img src='".$usuario[9]."' alt='' width='30' height='30'>";
+			echo "<label>".$usuario[1]." ".$row[5]."</label>";
+			echo "<p>".$row[3]."</p>";
+			if ($row[4]){
+				echo "<img src='".$row[4]."' alt='' width='300' height='300'>";	
+			}
+			echo "<hr>";
+		}
 	}
 
 }

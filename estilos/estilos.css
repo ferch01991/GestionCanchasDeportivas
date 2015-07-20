@@ -46,31 +46,25 @@
 
 
 #centro{
-	background-color: #fff;
-	opacity: 0.8;
-	border: solid;
+	
 	padding: 1em;
 	margin: 1em;
 	width: 50%;
 	display: inline-block;
 	vertical-align: top;
-	overflow: scroll;
+	
 }
 
 #centro1{
-	background-color: #000;
-	opacity: 0.8;
-	border: solid;
+	
 	padding: 1em;
 	margin: 1em;
 	width: 50%;
 	display: inline-block;
 	vertical-align: top;
-	overflow: scroll;
 }
 
 #derecha{
-	border: solid;
 	padding: 1em;
 	margin: 1em;
 	width: 22%;
@@ -94,9 +88,7 @@
 h4, h3, h5{
 	color: #FFFFFF;
 }
-h3{
-	color: #FFFFFF;
-}
+
 
 #infopartidos{
 	width: 100%;
@@ -110,6 +102,7 @@ h3{
 }
 
 #infopartidos1{
+	background-image: url("../imagenes/sistema/fondoOpaco.png");
 	width: 100%;
 	height: 45%;
 	
@@ -166,7 +159,6 @@ hrr {border: 2px inset #eee; height: 1px; width: 80%;}
 }
 
 #editarDerecha{
-	border: solid;
 	padding: 1em;
 	margin: 1em;
 	width: 20%;
@@ -186,3 +178,13 @@ label{
 	padding: 5em;
 	margin: 5em;
 }
+
+#formComentarios{
+	background-image: url("../imagenes/sistema/fondoClaro.png");
+	border-radius: 1em;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+

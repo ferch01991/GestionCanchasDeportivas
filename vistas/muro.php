@@ -20,7 +20,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
   $datos = $conexion->datosUsuario($idUsuario);
   include("../static/menu1.php");
   ?>
-  <div id="izquierda" align="center">
+  <div class="container" id="izquierda" align="center">
 
     <div>
       <?php echo "<a id='botonEditarUsuario' href='editarUsuario.php?idUsuario=".$datos[0]."'><img align='left' src='../imagenes/sistema/editar.png' WIDTH=20 HEIGHT=20></a>"?>
@@ -44,15 +44,23 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     </div>  
   </div>
   <div id="centro">
-    <div id="infoBD">
-    <h4>Información BD</h4>
-    <?php 
-    $resInfo = $conexion->infoBD();
-    while ($info = mysql_fetch_row($resInfo)){
-      echo "<h5 style='color: #000'>".$info[0]." ".$info[1]." ".$info[2]." ".$info[3]."</h5>";
-      echo "<br>";
-    }
-    ?>
+    <div class="container" id="formComentarios">
+      <br>
+      <form enctype="multipart/form-data" action="../controladores/nuevoComentario.php" method="POST">
+        <input name="encabezado" class="form-control" type="text" placeholder="Que hay?">
+        <br>
+        <input type="file" class="form-control" placeholder="" name="imagen">
+        <?php echo "<input required type='hidden' class=form-'control' name='idUsuario' value=".$idUsuario."> "?>
+        <?php echo "<input required type='hidden' class=form-'control' name='idGrupo' value=0> "?>
+        <br>
+        <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
+      </form>
+    </div>
+    <br>
+    <div id="comentariosMuro">
+      <?php 
+      $conexion->comentariosMuro($idGrupo);
+      ?>
     </div>
   </div>
   <div id="derecha">
@@ -66,6 +74,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
         <?php //echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
         <h6 style="color: #FFF">* Si no selecciona una imagen se utilizara una por defecto y no podrá ser cambiada luego</h6>
         -->
+        <?php echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
         <br>
         <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
       </form>

@@ -12,6 +12,8 @@
  {
   $coordenada1 = $result['latitud'];
   $coordenada2 = $result['longitud'];
+  $latitud = $coordenada1;
+  $longitud = $coordenada2;
   $nombre = $result['nombre'];
 
 }
@@ -35,9 +37,12 @@
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
   <script >
   function initialize() {
-   var myLatlng = new google.maps.LatLng(-3.983246,-79.200836);
+    var coordenada1= "<?php echo $latitud; ?>";
+   var coordenada2= "<?php echo $longitud; ?>";
+   var nombre= "<?php echo $nombre; ?>";
+   var myLatlng = new google.maps.LatLng(coordenada1,coordenada2);
    var mapOptions = {
-     zoom: 7,
+     zoom: 16,
      center: myLatlng
    }
    var coordenada1= "<?php echo $coordenada1; ?>";

@@ -4,7 +4,6 @@ include("../static/clase_mysql.php");
 $conexion = new clase_mysql;
 $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 ?>
-
 <html>
 <head>
 	<meta charset="utf-8">
@@ -14,41 +13,58 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	
 </head>
 <body id="bodyMuro">
+
 	<?php
 	extract($_GET);
+	$grupo = $conexion->datosGrupo($idGrupo);
 	include("../static/menu1.php");
 	?>
 
-	<div id="izquierda" align="center">
+	<div class="container" id="izquierda" align="center">
 		<div>
+			<?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$grupo[1]." WIDTH=140 WEIGTH=140>"?>
+			<h4><?php echo $grupo[0] ?> </h4>
+		</div>
+		<br>
+		<div id="integrantesGrupo">
+			<h5 align="left">Integrantes:</h5>
+			<br>
 			<?php
 			$usuarios = $conexion->usuarios($idGrupo);
 			while ($row = mysql_fetch_row($usuarios)) {
-				echo "<label>".$row[0]." ".$row[2]."</label>";
+				$espacio = "    ";
 				echo "<img src='".$row[1]."' alt='' width='20' height='20'>";
+				echo "<label>".$espacio.$row[0]." ".$row[2]."</label>";
+				
 				echo "<br>";					
 			}
 			?>
 		</div>
 	</div>
 
-	<div id="centro1">
+	<div class="container" id="centro1">
 		
-		<?php
-
-		$partidos = $conexion->partidos($idGrupo);
-		while ($row = mysql_fetch_row($partidos)) {
-			echo "<label>";
-			echo $row[0]." ";
-			echo $row[1]." ";
-			echo $row[2]." ";
-			echo $row[3]." ";
-			echo "</label>";
-			echo "<br>";
-		}
-		?>
+		<div class="container" id="formComentarios">
+			<br>
+			<form enctype="multipart/form-data" action="../controladores/nuevoComentario.php" method="POST">
+				<input name="encabezado" class="form-control" type="text" placeholder="Que hay?">
+				<br>
+				<input type="file" class="form-control" placeholder="" name="imagen">
+				<?php echo "<input required type='hidden' class=form-'control' name='idUsuario' value=".$idUsuario."> "?>
+				<?php echo "<input required type='hidden' class=form-'control' name='idGrupo' value=".$idGrupo."> "?>
+				<br>
+				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
+			</form>
+		</div>
+		<br>
+		<div id="comentariosGrupo">
+			<?php 
+			$conexion->comentariosGrupo($idGrupo);
+			?>
+		</div>
 	</div>
 
 	<div id="derecha">
