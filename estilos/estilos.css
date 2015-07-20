@@ -46,12 +46,27 @@
 
 
 #centro{
-	border: dotted;
+	background-color: #fff;
+	opacity: 0.8;
+	border: solid;
 	padding: 1em;
 	margin: 1em;
 	width: 50%;
 	display: inline-block;
 	vertical-align: top;
+	overflow: scroll;
+}
+
+#centro1{
+	background-color: #000;
+	opacity: 0.8;
+	border: solid;
+	padding: 1em;
+	margin: 1em;
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+	overflow: scroll;
 }
 
 #derecha{
@@ -76,7 +91,7 @@
 	display:list-item;
 }
 
-h4, h3,{
+h4, h3, h5{
 	color: #FFFFFF;
 }
 h3{
@@ -89,14 +104,14 @@ h3{
 	background-color: #FFFFFF;
 	border: solid;
 	border-radius: 20px;
-	opacity: 0.5;
+	opacity: 0.8;
 	overflow: scroll;
 	padding: 1em;
 }
 
 #infopartidos1{
 	width: 100%;
-	height: 30%;
+	height: 45%;
 	
 	border: solid;
 	border-radius: 2px;
@@ -104,6 +119,18 @@ h3{
 	overflow: scroll;
 	padding: 1em;
 }
+
+#infoBD{
+	width: 100%;
+	height: 77%;
+	background-color: #FFFFFF;
+	border: solid;
+	border-radius: 20px;
+	
+	overflow: scroll;
+	padding: 1em;
+}
+
 
 #infopartidos::-webkit-scrollbar { 
     display: none; 

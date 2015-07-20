@@ -4,7 +4,7 @@ include("../static/clase_mysql.php");
 $conexion = new clase_mysql;
 $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 ?>
-<!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -34,7 +34,8 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 		</div>
 	</div>
 
-	<div id="centro">
+	<div id="centro1">
+		
 		<?php
 
 		$partidos = $conexion->partidos($idGrupo);

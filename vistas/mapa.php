@@ -1,9 +1,13 @@
  <?php
  include("../static/site_config.php");
  include("../static/clase_mysql.php");
+ $coordenada1='';
+ $coordenada2='';
+ $nombre='';
+ extract($_GET);  
  $miconexion = new clase_mysql;
  $miconexion->conectar($db_name,$db_host, $db_user,$db_password);
- $rs = mysql_query("SELECT * FROM canchas WHERE id='1'");
+ $rs = mysql_query("SELECT * FROM canchas WHERE nombre='".$nombreCancha."'");
  while($result=mysql_fetch_array($rs))
  {
   $coordenada1 = $result['latitud'];
@@ -12,7 +16,7 @@
 
 }
 ?>
-
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,7 +37,7 @@
   function initialize() {
    var myLatlng = new google.maps.LatLng(-3.983246,-79.200836);
    var mapOptions = {
-     zoom: 15,
+     zoom: 7,
      center: myLatlng
    }
    var coordenada1= "<?php echo $coordenada1; ?>";
@@ -77,7 +81,7 @@
       $datos=$miconexion->mapa();
       echo "<h3 style='color: #fff;'>".$datos['1']."</h3>";
       echo "<p style='color: #fff;'><h3 style='color: #fff;'>Dirección:".$datos['4']." </h3></p>";
-      echo "<p><h3 style='color: #fff;'>Capacidad de Jugadores: </h3>".$datos['5']."</p>";
+      #echo "<p><h3 style='color: #fff;'>Capacidad de Jugadores: </h3>".$datos['5']."</p>";
       echo "<div class='col-md-6'>";
       echo "<a href='../controladores/gestionarPartido.php?idUsuario=$idUsuario&idPartido=$idPartido&op=2'<button type='submit' class='btn btn-default' style='background: #000000'; color:'#FFFFFF'><img align='left' src='../imagenes/sistema/ok.png' WIDTH=20 HEIGHT=20></button></a>";
       echo "</div>";

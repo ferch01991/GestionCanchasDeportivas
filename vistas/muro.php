@@ -44,14 +44,16 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     </div>  
   </div>
   <div id="centro">
+    <div id="infoBD">
     <h4>Información BD</h4>
     <?php 
     $resInfo = $conexion->infoBD();
     while ($info = mysql_fetch_row($resInfo)){
-      echo "<h5 style='color: #56FA00'>".$info[0]." ".$info[1]." ".$info[2]." ".$info[3]."</h5>";
+      echo "<h5 style='color: #000'>".$info[0]." ".$info[1]." ".$info[2]." ".$info[3]."</h5>";
       echo "<br>";
     }
     ?>
+    </div>
   </div>
   <div id="derecha">
     <div>
@@ -59,10 +61,11 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
       <form action="../controladores/crearGrupo.php" method="POST">
         <input required name="nombre" class="form-control" placeholder="Nombre del grupo">
         <br>
-        <label>Logotipo</label>
+        <!--<label>Logotipo</label>
         <input type="file" class="form-control" placeholder="" name="imagen">
-        <?php echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
+        <?php //echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
         <h6 style="color: #FFF">* Si no selecciona una imagen se utilizara una por defecto y no podrá ser cambiada luego</h6>
+        -->
         <br>
         <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
       </form>
