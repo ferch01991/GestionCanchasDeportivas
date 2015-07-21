@@ -7,7 +7,7 @@ extract($_POST);
 
 $fecha = date("Y")."/".date("m")."/".date("d");
 
-@$target_path = "../imagenes/usuarios/";
+@$target_path = "../imagenes/comentarios/";
 @$target_path = $target_path . basename( $_FILES['imagen']['name']); 
 if(move_uploaded_file($_FILES['imagen']['tmp_name'], $target_path)) { 
 	$imagenC = $target_path;
