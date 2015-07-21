@@ -74,9 +74,11 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 		<br>
 		<br>
 		<div id="comentariosGrupo">
+			<div style="padding:1em">
 			<?php 
 			$conexion->comentariosGrupo($idGrupo);
 			?>
+			</div>
 		</div>
 	</div>
 

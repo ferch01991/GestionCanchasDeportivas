@@ -259,7 +259,7 @@ class clase_mysql{
 	}
 
 	function comentariosGrupo($idGrupo){
-		$res = $this->consulta("SELECT * FROM comentarios WHERE idGrupo= '$idGrupo' ORDER BY fecha DESC");
+		$res = $this->consulta("SELECT * FROM comentarios WHERE idGrupo= '$idGrupo' ORDER BY id DESC");
 		while ($row = mysql_fetch_row($res)){
 			$usuario = $this->datosUsuario($row[1]);
 			echo "<img id='imagenUsuarioPequenia' src='".$usuario[9]."' alt='' width='30' height='30'>";
