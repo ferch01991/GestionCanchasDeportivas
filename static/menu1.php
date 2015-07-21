@@ -8,7 +8,6 @@
 					<ul class="dropdown-menu">
 						<?php
 						$grupos = $conexion->gruposUsuario($usuario[0]);
-						echo $usuario[0];
 						for ($i = 0; $i < count($grupos); $i++){
 							$grupo = $conexion->datosGrupo($grupos[$i]);
 							echo "<li><a href='../vistas/grupo.php?idGrupo=".$grupos[$i]."&idUsuario=".$usuario[0]."'>".$grupo[0]."</a>";

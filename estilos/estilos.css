@@ -46,23 +46,35 @@
 
 
 #centro{
-	
+	overflow: scroll;
 	#padding: 1em;
 	#margin: 1em;
 	width: 50%;
+	height: 85%;
 	display: inline-block;
 	vertical-align: top;
 	
 }
 
+#centro::-webkit-scrollbar { 
+    display: none; 
+}
+
+
 #centro1{
-	
+	overflow: scroll;
 	#padding: 1em;
 	#margin: 1em;
 	width: 39%;
+	height: 85%;
 	display: inline-block;
 	vertical-align: top;
 }
+
+#centro1::-webkit-scrollbar { 
+    display: none; 
+}
+
 
 #derecha{
 	#padding: 1em;
@@ -102,8 +114,8 @@ h4, h3, h5{
 #infopartidos{
 	width: 100%;
 	height: 50%;
-	background-color: #FFFFFF;
-	border: solid;
+	background-image: url("../imagenes/sistema/fondoClaro.png");
+	#border: solid;
 	border-radius: 20px;
 	opacity: 0.8;
 	overflow: scroll;
@@ -114,8 +126,7 @@ h4, h3, h5{
 	background-image: url("../imagenes/sistema/fondoOpaco.png");
 	width: 100%;
 	height: 45%;
-	
-	border: solid;
+	#border: solid;
 	border-radius: 2px;
 	overflow: inherit;
 	overflow: scroll;
@@ -137,6 +148,12 @@ h4, h3, h5{
 #infopartidos::-webkit-scrollbar { 
     display: none; 
 }
+
+
+#infopartidos1::-webkit-scrollbar { 
+    display: none; 
+}
+
 
 
 hrr {border: 2px inset #eee; height: 1px; width: 80%;}
@@ -198,3 +215,52 @@ label{
 }
 
 
+#comentariosMuro{
+	background-image: url("../imagenes/sistema/fondoOpaco.png");
+	border-radius: 1em;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	#border: solid;
+	#border-radius: 20
+}
+
+
+#comentariosGrupo{
+	background-image: url("../imagenes/sistema/fondoOpaco.png");
+	border-radius: 1em;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	#border: solid;
+	#sborder-radius: 20
+}
+
+
+
+#integrantesGrupo{
+	width: 100%;
+	height: 30%;
+	background-image: url("../imagenes/sistema/fondoClaro.png");
+	#border: solid;
+	border-radius: 20px;
+	opacity: 0.8;
+	overflow: scroll;
+	padding: 1em;
+}
+
+#integrantesGrupo::-webkit-scrollbar { 
+    display: none; 
+}
+
+#imagenUsuarioPequenia{
+	width: 30px;
+	height: 30px;
+	#border: solid;
+	border-color: #757171;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 70px;
+	position: relative;
+	#display:list-item;
+}

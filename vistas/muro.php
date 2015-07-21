@@ -33,14 +33,14 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <h4><?php echo $usuario[1] ?></h4>
     <br>
     <a href=""></a>
-    <div id="infoPartidos">
+    <div class="row" id="infoPartidos">
       <?php
       $resPartidos = $conexion->partidosUsuario($usuario[0], "aceptado");
       while ($row = mysql_fetch_row($resPartidos)){
-        echo "<a href='../vistas/cancha.php?idPartido=$row[4]&idUsuario=$usuario[0]' target='blank'>";
+        echo "<a href='../vistas/cancha.php?idPartido=$row[4]&idUsuario=$usuario[0]' target='blank' style='text-decoration: none; color:black'>";
         echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
         echo "</a>";
-        echo "<a href='../controladores/gestionarPartido.php?idUsuario=$usuario[0]&idPartido=$row[4]&op=3'>Ya no juego :/</a>";
+        echo "<a href='../controladores/gestionarPartido.php?idUsuario=$usuario[0]&idPartido=$row[4]&op=3' style='text-decoration: none; color:black'>Ya no juego :/</a>";
         echo "<hr>";
       }
       ?>
@@ -60,9 +60,9 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
       </form>
     </div>
     <br>
+    <br>
     <div id="comentariosMuro">
       <?php 
-
       $conexion->comentariosMuro($idUsuario);
       ?>
     </div>

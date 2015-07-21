@@ -30,22 +30,30 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 		<div>
 			<?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$logoGrupo." WIDTH=140 WEIGTH=140>"?>
 			<h4><?php echo $nombreGrupo ?> </h4>
-			<?php echo "<a href='mapa.php' target='tuArchivo' onclick=\"window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false;\"> Contrato </a>"; ?>
 		</div>
-		<br>
+		<h4 align="left">Integrantes:</h4>
 		<div id="integrantesGrupo">
-			<h5 align="left">Integrantes:</h5>
-			<br>
+			
 			<?php
 			$usuarios = $conexion->usuarios($idGrupo);
 			echo "<div align='left'>";
 			while ($row = mysql_fetch_row($usuarios)) {
-				echo "<img src='".$row[1]."' alt='' width='20' height='20'>";
-				echo "<label>".$row[0]." ".$row[2]."</label>";
+				echo "<img id='imagenUsuarioPequenia' src='".$row[1]."' alt='' width='20' height='20'>";
+				echo "<label style='color:black'>".$row[0]." ".$row[2]."</label>";
 				echo "<br>";					
 			}
 			echo "</div>";
 			?>
+		</div>
+		<div>
+			<h4>Invita un parce!</h4>
+			<form action="../controladores/mailusuarios.php" method="POST">
+				<input name="email" class="form-control" placeholder="Correo Electronico">
+				<br>
+				<?php echo "<input type='hidden' name='idGrupo' value =".$idGrupo." >"?>
+				<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
+				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Invitar</button></div>
+			</form>
 		</div>
 	</div>
 
@@ -63,7 +71,6 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Publicar</button></div>
 			</form>
 		</div>
-		<br>
 		<br>
 		<br>
 		<div id="comentariosGrupo">
@@ -105,16 +112,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				</div>
 			</form>
 		</div>
-		<div>
-			<h4>Invita un parce!</h4>
-			<form action="../controladores/mailusuarios.php" method="POST">
-				<input name="email" class="form-control" placeholder="Correo Electronico">
-				<br>
-				<?php echo "<input type='hidden' name='idGrupo' value =".$idGrupo." >"?>
-				<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
-				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Invitar</button></div>
-			</form>
-		</div>
+		
 		
 	</div>
 	<div class="container" id="chat">
@@ -127,7 +125,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 					?>
 				</div>
 				<div class="panel-body">
-					<div id="conversacion" style="overflow: scroll;">
+					<div id="conversacion" style="height: 65%; border: 1px solid #CCCCCC; padding: 12p%; border-radius: 5px; overflow-x: hidden;">
 					</div>
 					<?php echo "<input type='hidden' name='idGrupo' value =".$idGrupo." >"?>
 					<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
@@ -152,7 +150,6 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 		$.ajaxSetup({"cache":false});
 		setInterval("loadLdMessages()",200);
 	});
-
 	var registrarMensaje = function(){
 		$("#enviar").on("click", function(evento){
 			evento.preventDefault();

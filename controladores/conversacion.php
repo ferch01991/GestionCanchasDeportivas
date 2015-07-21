@@ -8,6 +8,6 @@ $id_grupo = $_POST['idGrupo'];
 $conversacion = $miconexion->conversacion($id_grupo);
 while ($row = mysql_fetch_row($conversacion)) {
 	$usuario = $miconexion->datosUsuario($row[0]);
-	echo "<p><img src='".$usuario[9]."' width=25 heigth=25><b>".$usuario[1]."</b> dice: ".$row[1]."</p>";			
+	echo "<p><img id='imagenUsuarioPequenia' src='".$usuario[9]."' width=25 heigth=25><b>".$usuario[1]."</b>: ".$row[1]."</p>";			
 }
 ?>

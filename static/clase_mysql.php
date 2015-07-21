@@ -262,9 +262,10 @@ class clase_mysql{
 		$res = $this->consulta("SELECT * FROM comentarios WHERE idGrupo= '$idGrupo' ORDER BY fecha DESC");
 		while ($row = mysql_fetch_row($res)){
 			$usuario = $this->datosUsuario($row[1]);
-			echo "<img src='".$usuario[9]."' alt='' width='30' height='30'>";
+			echo "<img id='imagenUsuarioPequenia' src='".$usuario[9]."' alt='' width='30' height='30'>";
 			echo "<label>".$usuario[1]." ".$row[5]."</label>";
 			echo "<h5>".$row[3]."</h5>";
+			echo "<div align='center'>";
 			if ($row[4]){
 
 				$ruta_imagen = $row[4];
@@ -314,6 +315,7 @@ class clase_mysql{
 
 				echo "<img src='".$row[4]."' alt='' >";	
 			}
+			echo "</div>";
 			echo "<hr>";
 		}
 	}
@@ -322,12 +324,17 @@ class clase_mysql{
 		$res = $this->consulta("SELECT * FROM comentarios, usuarios_grupos WHERE comentarios.idGrupo = usuarios_grupos.id_grupo AND usuarios_grupos.id_usuario = 1");
 		while ($row = mysql_fetch_row($res)){
 			$usuario = $this->datosUsuario($row[1]);
-			echo "<img src='".$usuario[9]."' alt='' width='30' height='30'>";
-			echo "<label>".$usuario[1]." ".$row[5]."</label>";
-			echo "<p>".$row[3]."</p>";
-			if ($row[4]){
-				echo "<img src='".$row[4]."' alt='' width='300' height='300'>";	
+			echo "<img id='imagenUsuarioPequenia' src='".$usuario[9]."' alt='' width='30' height='30'>";
+			echo "<label align='rigth'>".$usuario[1]." ".$row[5]."</label>";
+			echo "<br>";
+			echo "<br>";
+
+			echo "<p style='color:white'>".$row[3]."</p>";
+			echo "<div align='center'>";
+			if ($row[4]){		
+				echo "<img src='".$row[4]."' alt=''>";	
 			}
+			echo "</div>";
 			echo "<hr>";
 		}
 	}
