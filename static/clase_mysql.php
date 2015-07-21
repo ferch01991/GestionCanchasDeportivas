@@ -318,9 +318,5 @@ class clase_mysql{
 
 	}
 
-
-	
-
-
 }
 ?>
