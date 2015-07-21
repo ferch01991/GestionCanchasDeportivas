@@ -36,22 +36,23 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <form enctype="multipart/form-data" name="registro" action="../controladores/editarUsuario.php" method="POST">
       <div class="row">
         <div class="col-sm-6">
-          <?php echo "<input type='text' class='form-control' placeholder=".$usuario[1]." name='nombres'>" ?>
+          <?php echo "<input type='text' class='form-control' value=".$usuario[1]." name='nombres'>" ?>
           
         </div>
         <div class="col-sm-6">
-          <?php echo "<input type='text' class='form-control' placeholder=".$usuario[2]." name='apellidos'>" ?>
+          <?php echo "<input type='text' class='form-control' value=".$usuario[2]." name='apellidos'>" ?>
         </div>
       </div>
       <div class="form-group">
         <br>
-        <input type="password" class="form-control" placeholder="Contraseña" name="password">
+        <?php echo "<input type='password' class='form-control' value=".$usuario[4]." name='password'>" ?>
+        
         <br>
-        <?php echo "<input type='text' class='form-control' placeholder=".$usuario[6]." name='telefono'>" ?>
+        <?php echo "<input type='text' class='form-control' value=".$usuario[6]." name='telefono'>" ?>
         <br>
-        <?php echo "<input type='text' class='form-control' placeholder=".$usuario[7]." name='direccion'>" ?>
+        <?php echo "<input type='text' class='form-control' value=".$usuario[7]." name='direccion'>" ?>
         <br>
-        <?php echo "<input type='text' class='form-control' placeholder=".$usuario[8]." name='acerca'>" ?>
+        <?php echo "<input type='text' class='form-control' value=".$usuario[8]." name='acerca'>" ?>
         <br>
         <input required type="file" class="form-control" placeholder="" name="imagen">
         <?php echo "<input required type='hidden' class=form-'control' name='id' value=".$usuario[0].">    "?>

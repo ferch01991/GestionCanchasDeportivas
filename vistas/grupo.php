@@ -28,6 +28,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 
 	<div class="container" id="izquierda" align="center">
 		<div>
+			<?php echo "<a id='botonEditarUsuario' href='editarGrupo.php?idUsuario=".$idUsuario."&idGrupo=".$idGrupo."'><img align='left' src='../imagenes/sistema/editar.png' WIDTH=20 HEIGHT=20></a>"?>
 			<?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$logoGrupo." WIDTH=140 WEIGTH=140>"?>
 			<h4><?php echo $nombreGrupo ?> </h4>
 		</div>
@@ -161,6 +162,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				url: "../controladores/registro_chat.php",
 				data: frm
 			}).done(function(info){
+				$("#mensaje").val("");
 				var altura = $("#conversacion").prop("scrollHeight");
 				$("#conversacion").scrollTop(altura);
 				console.log(info);
@@ -176,7 +178,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 		}).done(function(info){
 			$("#conversacion").html( info );
 			$("#conversacion p:last-child").css({"background-color":"lightgreen", "padding-botton":"20px"});
-			var altura = $("#conversation").prop("scrollHeight");
+			var altura = $("#conversacion").prop("scrollHeight");
 			$("#conversacion").scrollTop(altura);
 			console.log(info);
 		});
