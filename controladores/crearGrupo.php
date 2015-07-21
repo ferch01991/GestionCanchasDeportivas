@@ -6,7 +6,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 
 extract($_POST);
 
-$sql = "INSERT INTO grupos VALUES('','$nombre','$idUsuario','')";
+$sql = "INSERT INTO grupos VALUES('','$nombre','$idUsuario','../imagenes/grupos/fondoGrupo.jpg')";
 $conexion->ejecutar($sql);
 
 $fecha = date("Y")."/".date("m")."/".date("d");

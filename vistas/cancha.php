@@ -1,145 +1,96 @@
-
 <?php
 include("../static/site_config.php");
 include("../static/clase_mysql.php");
-
+$conexion = new clase_mysql;
+$conexion->conectar($db_name,$db_host, $db_user,$db_password);
 ?>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<title>Cancha</title>
-	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
-	<link href="navbar.css" rel="stylesheet">
-	<script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
-
-	
-	<script type="text/javascript">
-	var cv, cx, objetos, objetoActual=null;
-	var inicioX=0, inicioY=0;
-	var img = new Image();
-	img.src = "../imagenes/fondos/campo_futbol.jpg";
-
-
-	function actualizar(){
-		cx.drawImage(img, 0, 0);
-		cx.textAlign='center';
-		for(var i =0; i<objetos.length;i++){
-			cx.fillStyle = objetos[i].color;
-			cx.fillRect(objetos[i].x,objetos[i].y,objetos[i].width,objetos[i].height);
-		}
-	}
-	function dibujar(res){
-		var jugadores = res/2;
-		var numJugadores =Math.floor(jugadores);
-		alert("Numero de jugadores confirmados:  " + res);
-		objetos = [];
-
-		for(var i=0; i<jugadores; i++){
-			
-			objetos.push({
-				x: 370, y:3,
-				width: 20, height: 20,
-				color: '#000000'
-
-			});
-		}
-		for(var i=0; i<numJugadores; i++){
-
-			objetos.push({
-				x: 450, y:3,
-				width: 20, height: 20,
-				color: '#fff'
-
-			});
-			
-		}
-	}
-
-
-
-	function imgCanvas(){
-		
-		cv = document.getElementById('lienzo');
-		cx = cv.getContext('2d');
-
-		function dibujar(res){
-			
-		}
-
-		
-
-		
-		actualizar();
-		
-
-		cv.onmousedown =function(event){
-			for(var i=0;  i<objetos.length; i++){
-				if(objetos[i].x<event.clientX && (objetos[i].width+objetos[i].x>event.clientX) && objetos[i].y<event.clientY && (objetos[i].height+objetos[i].y>event.clientY)){
-					objetoActual = objetos[i];
-					inicioY = event.clientY-objetos[i].y;
-					inicioX = event.clientX-objetos[i].x;
-					break;
-
-
-				}
-			}
-
-		};
-		cv.onmousemove = function(event){
-			if (objetoActual!=null) {
-				objetoActual.x=event.clientX - inicioX;
-				objetoActual.y = event.clientY - inicioY;
-				actualizar();
-			}
-			
-		};
-		cv.onmouseup = function(event){
-			objetoActual=null;
-		};
-
-	};
-
-
-	</script>
-	
+  <meta charset="utf-8">
+  <title>Alineaciones</title>
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
+  <link href="navbar.css" rel="stylesheet">
+  <script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <style>
+  #draggable {
+    width: 56px;
+    height: 56px;
+    text-align: center;
+    position: relative;
+    border: solid;
+    border-color: #757171;
+    border-radius: 70px;
+    position: relative;
+    margin-top: 30px;
+    #display: inline-block;
+  }
+  #droppable {
+    position: absolute;
+    left: 235px;
+    margin-top: 105px;
+    top: 0;
+    width: 900px;
+    height: 565px;
+    background-image: url("../imagenes/fondos/cancha.jpg");
+    color: #fff;
+    padding: 10px;
+  }
+  </style>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  
 </head>
-<body id="bodyMuro" onload=" imgCanvas()" >
-	
-	<canvas width="840px" height="560" id="lienzo">No soporta canvas</canvas>
-	<!--</section>-->
-	<?php 
-	extract($_GET);
-	$conexion = new clase_mysql;
-	$conexion->conectar($db_name,$db_host, $db_user,$db_password);
-	$conexion->consulta("select * from confirmaciones where id_partido=".$idPartido." and estado='aceptado'");
-	$l=$conexion->numregistros();
-	echo "<p></p>";
-	
-	
-	?> 
-	<script language="javascript"> 
-	var a= "<?php echo $l; ?>" ;
-	
-	dibujar(a); 
-	</script> 
-	
-	<?php 
-	
-	?> 
+<body id="bodyMuro">
 
-	<?php
-	$conexion = new clase_mysql;
-	$conexion->conectar($db_name,$db_host, $db_user,$db_password);
-	$conexion->consulta("SELECT distinct u.imagen,u.nombres from usuarios u, confirmaciones c where (c.estado='aceptado' and c.id_partido='$idPartido')and u.id=c.id_usuario ");
-	$l=$conexion->numregistros();
-	echo "<br>";
-	echo "<br>";
-	echo "<br>";
-	$datos=$conexion->listajugadores();
-	
-	?>
-	
-	
+  <?php
+   extract($_GET);
+   $usuario = $conexion->datosUsuario($idUsuario);
+   include("../static/menu1.php");
+
+   ?>
+   <form action="../imagenes/captura/img_captura.php" method="POST">
+    <center>
+      <input type="submit" value="Captura Imagen" class="btn btn-success" name="btnter">
+    </center>
+  </form>
+  <div id="droppable"></div>
+  <div class="container">
+    <?php
+    extract($_GET);
+    $conexion = new clase_mysql;
+    $conexion->conectar($db_name,$db_host, $db_user,$db_password);
+    $res= $conexion->consulta("SELECT distinct u.imagen,u.nombres from usuarios u, confirmaciones c where (c.estado='aceptado' and c.id_partido='$idPartido')and u.id=c.id_usuario ");
+    while (@$row = mysql_fetch_array($res)) {
+      @$id=$row['imagen'];
+      @$nombre=$row['nombres'];
+      echo '<div id="draggable">';
+      echo "<img><img src='".$id."' WIDTH=50px HEIGHT=50px style='border-radius: 71px'></>";
+      echo "<h4 style='color:white font-weigth:bold'>".$nombre."</h4>";
+        //echo "<hr>";
+      echo '</div>';
+    }
+    ?>
+    
+    <script>
+    $( "#draggable,#draggable2" ).draggable({
+     connectWith:".s1"
+    });
+    $( "#droppable" ).droppable({
+      drop: function() {
+    }
+    });
+    </script>
+
+  </div>
+  
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../bootstrap/js/bootstrap.min.js"></script>
+  <script src="../bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+
 </body>
 </html>

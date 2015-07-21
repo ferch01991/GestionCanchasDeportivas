@@ -17,7 +17,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 <body id="bodyMuro">
 	<?php
 	extract($_GET);
-	$datos = $conexion->datosUsuario($idUsuario);
+	$usuario = $conexion->datosUsuario($idUsuario);
 	$idG = $idGrupo;
 	$datosGrupo = $conexion->datosGrupo($idGrupo);
 	include("../static/menu1.php");

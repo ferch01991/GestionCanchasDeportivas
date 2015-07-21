@@ -115,6 +115,7 @@ class clase_mysql{
 			return $row[0];
 		}
 	}
+
 	function idGrupo($nombre){
 		$sql = "SELECT id FROM grupos WHERE nombre ='".$nombre."'";
 		$res = mysql_query($sql);
@@ -228,6 +229,7 @@ class clase_mysql{
 			echo "<h5>".$row[3]."</h5>";
 			echo "<div align='center'>";
 			if ($row[4]){
+
 				$ruta_imagen = $row[4];
 				$miniatura_ancho_maximo = 350;
 				$miniatura_alto_maximo = 350;
@@ -236,6 +238,9 @@ class clase_mysql{
 				$imagen_alto = $info_imagen[1];
 				$imagen_tipo = $info_imagen['mime'];
 				$lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
+
+				$lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
+
 				switch ( $imagen_tipo ){
 					case "image/jpg":
 					case "image/jpeg":
@@ -252,6 +257,14 @@ class clase_mysql{
 				#imagejpeg( $lienzo, $row[4], 90 );
 				$proporcion_imagen = $imagen_ancho / $imagen_alto;
 				$proporcion_miniatura = $miniatura_ancho_maximo / $miniatura_alto_maximo;
+
+				imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, $miniatura_ancho_maximo, $miniatura_alto_maximo, $imagen_ancho, $imagen_alto);
+
+				#imagejpeg( $lienzo, $row[4], 90 );
+
+				$proporcion_imagen = $imagen_ancho / $imagen_alto;
+				$proporcion_miniatura = $miniatura_ancho_maximo / $miniatura_alto_maximo;
+
 				if ( $proporcion_imagen > $proporcion_miniatura ){
 					$miniatura_ancho = $miniatura_ancho_maximo;
 					$miniatura_alto = $miniatura_ancho_maximo / $proporcion_imagen;
@@ -265,6 +278,11 @@ class clase_mysql{
 				$lienzo = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
 				imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
 				imagejpeg($lienzo, $row[4], 80);
+
+				$lienzo = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
+				imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
+				imagejpeg($lienzo, $row[4], 80);
+
 				echo "<img src='".$row[4]."' alt='' >";	
 			}
 			echo "</div>";
@@ -279,6 +297,8 @@ class clase_mysql{
 			echo "<label align='rigth'>".$usuario[1]." ".$row[5]."</label>";
 			echo "<br>";
 			echo "<br>";
+
+
 			echo "<p style='color:white'>".$row[3]."</p>";
 			echo "<div align='center'>";
 			if ($row[4]){		
@@ -295,6 +315,12 @@ class clase_mysql{
 	function conversacion($id_grupo){
 		$res = $this->consulta("select id_usuario, mensaje from chat where id_grupo = '".$id_grupo."' order by id_chat asc");
 		return $res;
+
 	}
+
+
+	}
+
+
 }
 ?>

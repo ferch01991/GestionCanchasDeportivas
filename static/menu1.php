@@ -1,17 +1,16 @@
-
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<?php echo "<a class='navbar-brand' href='../vistas/muro.php?idUsuario=".$idUsuario."'>Sistema Canchas</a>"?>
+				<?php echo "<a class='navbar-brand' href='../vistas/muro.php?idUsuario=".$usuario[0]."'>Sistema Canchas</a>"?>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Grupos <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<?php
-						$grupos = $conexion->gruposUsuario($idUsuario);
+						$grupos = $conexion->gruposUsuario($usuario[0]);
 						for ($i = 0; $i < count($grupos); $i++){
-							$idGrupo = $conexion->idGrupo($grupos[$i], $idUsuario);
-							echo "<li><a href='../vistas/grupo.php?idGrupo=".$idGrupo."&idUsuario=".$idUsuario."'>".$grupos[$i]."</a>";
+							$grupo = $conexion->datosGrupo($grupos[$i]);
+							echo "<li><a href='../vistas/grupo.php?idGrupo=".$grupos[$i]."&idUsuario=".$usuario[0]."'>".$grupo[0]."</a>";
 							echo "</li>";
 						}
 						?>
@@ -23,7 +22,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Invitaciones <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<?php 	
-						$resInvitaciones = $conexion->invitaciones($idUsuario);
+						$resInvitaciones = $conexion->invitaciones($usuario[0]);
 						while ($row = mysql_fetch_row($resInvitaciones)){
 							$grupo = $conexion->datosGrupo($row[0]);
 							

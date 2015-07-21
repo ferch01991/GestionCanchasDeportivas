@@ -5,8 +5,8 @@
  $coordenada2='';
  $nombre='';
  extract($_GET);  
- $miconexion = new clase_mysql;
- $miconexion->conectar($db_name,$db_host, $db_user,$db_password);
+ $conexion = new clase_mysql;
+ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
  $rs = mysql_query("SELECT * FROM canchas WHERE nombre='".$nombreCancha."'");
  while($result=mysql_fetch_array($rs))
  {
@@ -15,9 +15,9 @@
   $latitud = $coordenada1;
   $longitud = $coordenada2;
   $nombre = $result['nombre'];
-
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,16 +32,15 @@
 
   <link rel="stylesheet" type="text/css" href="../estilos/estilos2.css"> 
   <title>Mapa</title>
-  <section id="encabezado" style="background-image: url('../imagenes/fondos/header-sprite.png');background-repeat: no-repeat; "><h1>Confirmar Partido</h1>a</section>
 
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
   <script >
   function initialize() {
     var coordenada1= "<?php echo $latitud; ?>";
-   var coordenada2= "<?php echo $longitud; ?>";
-   var nombre= "<?php echo $nombre; ?>";
-   var myLatlng = new google.maps.LatLng(coordenada1,coordenada2);
-   var mapOptions = {
+    var coordenada2= "<?php echo $longitud; ?>";
+    var nombre= "<?php echo $nombre; ?>";
+    var myLatlng = new google.maps.LatLng(coordenada1,coordenada2);
+    var mapOptions = {
      zoom: 16,
      center: myLatlng
    }
@@ -75,35 +74,39 @@
 
 <body  id="bodyMuro"> 
 
-
- <div class="container">
-  <div class='row'>
-   <div class='col-md-6' style='padding-bottom: 182px;'>
-    <center>
-    	<?php
-      extract($_GET);
-      $miconexion->consulta("SELECT * FROM canchas WHERE nombre='".$nombreCancha."' ");
-      $datos=$miconexion->mapa();
-      echo "<h3 style='color: #fff;'>".$datos['1']."</h3>";
-      echo "<p style='color: #fff;'><h3 style='color: #fff;'>Dirección:".$datos['4']." </h3></p>";
+  <?php 
+  extract($_GET);
+  $usuario = $conexion->datosUsuario($idUsuario);
+  include("../static/menu1.php");
+  ?>
+  <div class="container">
+    <div class='row'>
+     <div class='col-md-6' style='padding-bottom: 182px;'>
+      <center>
+       <?php
+       extract($_GET);
+       $conexion->consulta("SELECT * FROM canchas WHERE nombre='".$nombreCancha."' ");
+       $datos=$conexion->mapa();
+       echo "<h3 style='color: #fff;'>".$datos['1']."</h3>";
+       echo "<p style='color: #fff;'><h3 style='color: #fff;'>Dirección:".$datos['4']." </h3></p>";
       #echo "<p><h3 style='color: #fff;'>Capacidad de Jugadores: </h3>".$datos['5']."</p>";
-      echo "<div class='col-md-6'>";
-      echo "<a href='../controladores/gestionarPartido.php?idUsuario=$idUsuario&idPartido=$idPartido&op=2'<button type='submit' class='btn btn-default' style='background: #000000'; color:'#FFFFFF'><img align='left' src='../imagenes/sistema/ok.png' WIDTH=20 HEIGHT=20></button></a>";
-      echo "</div>";
+       echo "<div class='col-md-6'>";
+       echo "<a href='../controladores/gestionarPartido.php?idUsuario=$idUsuario&idPartido=$idPartido&op=2'<button type='submit' class='btn btn-default' style='background: #000000'; color:'#FFFFFF'><img align='left' src='../imagenes/sistema/ok.png' WIDTH=20 HEIGHT=20></button></a>";
+       echo "</div>";
 
 
-      echo "<div class='col-md-6'>";
-      echo "<a href='../controladores/gestionarPartido.php?idUsuario=$idUsuario&idPartido=$idPartido&op=1'><button type='submit' class='btn btn-default' style='background: #000000'; color:'#FFFFFF'><img align='left' src='../imagenes/sistema/no.png' WIDTH=20 HEIGHT=20></button></a>";
-      echo "<br><br>";
-      echo "<br><br>";
-      echo "<br><br>";
-      echo "<br><br>";
+       echo "<div class='col-md-6'>";
+       echo "<a href='../controladores/gestionarPartido.php?idUsuario=$idUsuario&idPartido=$idPartido&op=1'><button type='submit' class='btn btn-default' style='background: #000000'; color:'#FFFFFF'><img align='left' src='../imagenes/sistema/no.png' WIDTH=20 HEIGHT=20></button></a>";
+       echo "<br><br>";
+       echo "<br><br>";
+       echo "<br><br>";
+       echo "<br><br>";
 
-      echo "</div>";
-      ?>
-    </center>
-  </div>
-  <div class='col-md-6'>
+       echo "</div>";
+       ?>
+     </center>
+   </div>
+   <div class='col-md-6'>
     <div align="center" id="map">
 
     </div>
