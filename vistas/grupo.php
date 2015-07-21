@@ -18,6 +18,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	<?php
 	extract($_GET);
 	$grupo = $conexion->datosGrupo($idGrupo);
+	$usuario = $conexion->datosUsuario($idUsuario);
 	include("../static/menu1.php");
 	?>
 
@@ -31,7 +32,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 			<h5 align="left">Integrantes:</h5>
 			<br>
 			<?php
-			$usuarios = $conexion->usuarios($idGrupo);
+			$usuarios = $conexion->usuarios($grupo[2]);
 			while ($row = mysql_fetch_row($usuarios)) {
 				$espacio = "    ";
 				echo "<img src='".$row[1]."' alt='' width='20' height='20'>";
@@ -54,13 +55,13 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<?php echo "<input required type='hidden' class=form-'control' name='idUsuario' value=".$idUsuario."> "?>
 				<?php echo "<input required type='hidden' class=form-'control' name='idGrupo' value=".$idGrupo."> "?>
 				<br>
-				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
+				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Publicar</button></div>
 			</form>
 		</div>
 		<br>
 		<div id="comentariosGrupo">
 			<?php 
-			$conexion->comentariosGrupo($idGrupo);
+			$conexion->comentariosGrupo($grupo[2]);
 			?>
 		</div>
 	</div>
@@ -107,8 +108,10 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Invitar</button></div>
 			</form>
 		</div>
-		<div class="row">
-			<form id="formChat" role="form">
+		
+	</div>
+	<div class="container" id="chat">
+		<form id="formChat" role="form">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<?php
@@ -117,7 +120,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 					?>
 				</div>
 				<div class="panel-body">
-					<div id="conversacion" style="height: 80px; border: 1px solid #CCCCCC; padding: 12p%; border-radius: 5px; overflow-x: hidden;">
+					<div id="conversacion" style="overflow: scroll;">
 					</div>
 					<?php echo "<input type='hidden' name='idGrupo' value =".$_GET['idGrupo']." >"?>
 					<?php echo "<input required name='idUsuario' type='hidden' value=".$_GET['idUsuario'].">"?>
@@ -131,49 +134,49 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 					</div>
 				</div>
 			</div>
-			</form>
-		</div>
+		</form>
 	</div>
-
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script>
-		$(document).on("ready", function(){
-			registrarMensaje();
-			$.ajaxSetup({"cache":false});
-			setInterval("loadLdMessages()",200);
-		});
+	$(document).on("ready", function(){
+		registrarMensaje();
+		$.ajaxSetup({"cache":false});
+		setInterval("loadLdMessages()",200);
+	});
 
-		var registrarMensaje = function(){
-			$("#enviar").on("click", function(evento){
-				evento.preventDefault();
-				var frm = $("#formChat").serialize();
-				$.ajax({
-					type: "POST",
-					url: "../controladores/registro_chat.php",
-					data: frm
-				}).done(function(info){
-					var altura = $("#conversacion").prop("scrollHeight");
-					$("#conversacion").scrollTop(altura);
-					console.log(info);
-				})
-			});
-		}
-		var loadLdMessages = function(){
+	var registrarMensaje = function(){
+		$("#enviar").on("click", function(evento){
+			evento.preventDefault();
 			var frm = $("#formChat").serialize();
 			$.ajax({
 				type: "POST",
-				url: "../controladores/conversacion.php",
+				url: "../controladores/registro_chat.php",
 				data: frm
 			}).done(function(info){
-				$("#conversacion").html( info );
-				$("#conversacion p:last-child").css({"background-color":"lightgreen", "padding-botton":"20px"});
-				var altura = $("#conversation").prop("scrollHeight");
+				var altura = $("#conversacion").prop("scrollHeight");
 				$("#conversacion").scrollTop(altura);
 				console.log(info);
-			});
-		}	
+			})
+		});
+	}
+	var loadLdMessages = function(){
+		var frm = $("#formChat").serialize();
+		$.ajax({
+			type: "POST",
+			url: "../controladores/conversacion.php",
+			data: frm
+		}).done(function(info){
+			$("#conversacion").html( info );
+			$("#conversacion p:last-child").css({"background-color":"lightgreen", "padding-botton":"20px"});
+			var altura = $("#conversation").prop("scrollHeight");
+			$("#conversacion").scrollTop(altura);
+			console.log(info);
+		});
+	}	
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

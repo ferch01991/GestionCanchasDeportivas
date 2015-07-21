@@ -116,7 +116,7 @@ class clase_mysql{
 
 
 	function gruposUsuario($id){
-		$sql = "SELECT nombre FROM grupos WHERE id_creador = ".$id."";
+		$sql = "SELECT id_grupo FROM usuarios_grupos WHERE id_usuario = ".$id."";
 		$datos = array();
 		$res = mysql_query($sql);
 		while ($row = mysql_fetch_row($res)){
@@ -131,7 +131,7 @@ class clase_mysql{
 		}
 	}
 
-	function idGrupo($nombre, $idUsuario){
+	function idGrupo($nombre){
 		$sql = "SELECT id FROM grupos WHERE nombre ='".$nombre."'";
 		$res = mysql_query($sql);
 		$idGrupo = 0;
@@ -202,11 +202,12 @@ class clase_mysql{
 	}
 
 	function datosGrupo($idGrupo){
-		$res = $this->consulta("SELECT nombre, logo FROM grupos WHERE grupos.id =".$idGrupo." ");
+		$res = $this->consulta("SELECT nombre, logo, id FROM grupos WHERE grupos.id =".$idGrupo." ");
 		$grupo = array();
 		$row = mysql_fetch_row($res);
 		array_push($grupo, $row[0]);
 		array_push($grupo, $row[1]);
+		array_push($grupo, $row[2]);
 		return $grupo;
 	}
 

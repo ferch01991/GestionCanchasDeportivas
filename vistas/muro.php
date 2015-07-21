@@ -11,31 +11,36 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
   <title>Sistema Canchas</title>
   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../estilos/estilos.css">
+  <script> 
+  function abrir(url) { 
+    open(url,'','top=300,left=300,width=300,height=300') ; 
+  } 
+  </script> 
 </head>
 <body id="bodyMuro">
   <?php
   extract($_GET);
-  $datos = $conexion->datosUsuario($idUsuario);
+  $usuario = $conexion->datosUsuario($idUsuario);
   include("../static/menu1.php");
   ?>
   <div class="container" id="izquierda" align="center">
 
     <div>
-      <?php echo "<a id='botonEditarUsuario' href='editarUsuario.php?idUsuario=".$datos[0]."'><img align='left' src='../imagenes/sistema/editar.png' WIDTH=20 HEIGHT=20></a>"?>
-      <?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$datos[9]." WIDTH=140 WEIGTH=140>"?>
+      <?php echo "<a id='botonEditarUsuario' href='editarUsuario.php?idUsuario=".$usuario[0]."'><img align='left' src='../imagenes/sistema/editar.png' WIDTH=20 HEIGHT=20></a>"?>
+      <?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$usuario[9]." WIDTH=140 WEIGTH=140>"?>
     </div>
 
-    <h4><?php echo $datos[1] ?></h4>
+    <h4><?php echo $usuario[1] ?></h4>
     <br>
     <a href=""></a>
     <div id="infoPartidos">
       <?php
-      $resPartidos = $conexion->partidosUsuario($datos[0], "aceptado");
+      $resPartidos = $conexion->partidosUsuario($usuario[0], "aceptado");
       while ($row = mysql_fetch_row($resPartidos)){
-        echo "<a href='../vistas/cancha.php?idPartido=$row[4]' target='blank'>";
+        echo "<a href='../vistas/cancha.php?idPartido=$row[4]&idUsuario=$usuario[0]' target='blank'>";
         echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
         echo "</a>";
-        echo "<a href='../controladores/gestionarPartido.php?idUsuario=$datos[0]&idPartido=$row[4]&op=3'>Ya no juego :/</a>";
+        echo "<a href='../controladores/gestionarPartido.php?idUsuario=$usuario[0]&idPartido=$row[4]&op=3'>Ya no juego :/</a>";
         echo "<hr>";
       }
       ?>
@@ -57,7 +62,8 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
     <br>
     <div id="comentariosMuro">
       <?php 
-      $conexion->comentariosMuro($idGrupo);
+
+      $conexion->comentariosMuro($idUsuario);
       ?>
     </div>
   </div>
@@ -69,35 +75,35 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
         <br>
         <!--<label>Logotipo</label>
         <input type="file" class="form-control" placeholder="" name="imagen">
-        <?php //echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
+        <?php //echo "<input type='hidden' name='idUsuario' value=".$usuario[0].">"?>
         <h6 style="color: #FFF">* Si no selecciona una imagen se utilizara una por defecto y no podrá ser cambiada luego</h6>
-        -->
-        <?php echo "<input type='hidden' name='idUsuario' value=".$datos[0].">"?>
-        <br>
-        <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
-      </form>
-    </div>
-
-    <br>
-    <div>
-      <h4>Partidos Nuevos:</h4>
-      <div id="infoPartidos1">
-        <?php
-        $resPartidos = $conexion->partidosUsuario($datos[0], "pendiente");
-        while ($row = mysql_fetch_row($resPartidos)){
-          echo "<h5>";
-          echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
-          echo "</h5>";
-          echo "<div align='center'><a href='../vistas/mapa.php?nombreCancha=$row[1]&idUsuario=$datos[0]&idPartido=$row[4]&op=2'>Hagale! </a></div>";
-          echo "<hr>";
-        }
-        ?>
-      </div>
-    </div>    
+      -->
+      <?php echo "<input type='hidden' name='idUsuario' value=".$usuario[0].">"?>
+      <br>
+      <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
+    </form>
   </div>
-  
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="../bootstrap/js/bootstrap.min.js"></script>
+  <br>
+  <div>
+    <h4>Partidos Nuevos:</h4>
+    <div id="infoPartidos1">
+      <?php
+      $resPartidos = $conexion->partidosUsuario($usuario[0], "pendiente");
+      while ($row = mysql_fetch_row($resPartidos)){
+        echo "<h5>";
+        echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
+        echo "</h5>";
+        echo "<div align='center'><a href='../vistas/mapa.php?nombreCancha=$row[1]&idUsuario=$usuario[0]&idPartido=$row[4]&op=2'>Hagale! </a></div>";
+        echo "<hr>";
+      }
+      ?>
+    </div>
+  </div>    
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

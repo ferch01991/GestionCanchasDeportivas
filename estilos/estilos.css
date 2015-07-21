@@ -22,7 +22,7 @@
 	
 	width: 30%;
 	display: inline-block;
-	padding: 1em;
+	#padding: 1em;
 	margin: 1em;
 	margin-right: 6em;
 }
@@ -30,14 +30,14 @@
 #imagenInicio{
 	width: 59%;
 	display: inline-block;
-	padding: 1em;
+	#padding: 1em;
 	margin: 1em;
 }
 
 #izquierda{
 	
-	padding: 1em;
-	margin: 1em;
+	#padding: 1em;
+	#margin: 1em;
 	width: 17%;
 	display: inline-block;
 	vertical-align: top;
@@ -47,8 +47,8 @@
 
 #centro{
 	
-	padding: 1em;
-	margin: 1em;
+	#padding: 1em;
+	#margin: 1em;
 	width: 50%;
 	display: inline-block;
 	vertical-align: top;
@@ -57,17 +57,26 @@
 
 #centro1{
 	
-	padding: 1em;
-	margin: 1em;
-	width: 50%;
+	#padding: 1em;
+	#margin: 1em;
+	width: 30%;
 	display: inline-block;
 	vertical-align: top;
 }
 
 #derecha{
-	padding: 1em;
-	margin: 1em;
-	width: 22%;
+	#padding: 1em;
+	#margin: 1em;
+	width: 19%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#chat{
+	#padding: 1em;
+	#margin: 1em;
+	width: 24%;
+	height: 100%;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -162,6 +171,7 @@ hrr {border: 2px inset #eee; height: 1px; width: 80%;}
 	padding: 1em;
 	margin: 1em;
 	width: 20%;
+	height: 100%;
 	display: inline-block;
 	
 }
