@@ -213,7 +213,7 @@ class clase_mysql{
 
 	function controlCancha($cancha, $fecha, $hora){
 		$res = $this->consulta("select p.id_cancha, p.fecha, p.hora from partidos p 
-								where p.id_cancha = '".$cancha."' and p.fecha = '".$fecha."' and hora = '".$hora."'");
+			where p.id_cancha = '".$cancha."' and p.fecha = '".$fecha."' and hora = '".$hora."'");
 		$datos = array();
 		while ($row = mysql_fetch_array($res)) {
 			array_push($datos, $row[0]);
@@ -259,14 +259,60 @@ class clase_mysql{
 	}
 
 	function comentariosGrupo($idGrupo){
-		$res = $this->consulta("SELECT * FROM comentarios WHERE idGrupo= '$idGrupo'");
+		$res = $this->consulta("SELECT * FROM comentarios WHERE idGrupo= '$idGrupo' ORDER BY fecha DESC");
 		while ($row = mysql_fetch_row($res)){
 			$usuario = $this->datosUsuario($row[1]);
 			echo "<img src='".$usuario[9]."' alt='' width='30' height='30'>";
 			echo "<label>".$usuario[1]." ".$row[5]."</label>";
 			echo "<h5>".$row[3]."</h5>";
 			if ($row[4]){
-				echo "<img src='".$row[4]."' alt='' width='300' height='300'>";	
+
+				$ruta_imagen = $row[4];
+				$miniatura_ancho_maximo = 350;
+				$miniatura_alto_maximo = 350;
+				$info_imagen = getimagesize($ruta_imagen);
+				$imagen_ancho = $info_imagen[0];
+				$imagen_alto = $info_imagen[1];
+				$imagen_tipo = $info_imagen['mime'];
+
+				$lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
+
+				switch ( $imagen_tipo ){
+					case "image/jpg":
+					case "image/jpeg":
+					$imagen = imagecreatefromjpeg( $ruta_imagen );
+					break;
+					case "image/png":
+					$imagen = imagecreatefrompng( $ruta_imagen );
+					break;
+					case "image/gif":
+					$imagen = imagecreatefromgif( $ruta_imagen );
+					break;
+				}
+
+				imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, $miniatura_ancho_maximo, $miniatura_alto_maximo, $imagen_ancho, $imagen_alto);
+
+				#imagejpeg( $lienzo, $row[4], 90 );
+
+				$proporcion_imagen = $imagen_ancho / $imagen_alto;
+				$proporcion_miniatura = $miniatura_ancho_maximo / $miniatura_alto_maximo;
+
+				if ( $proporcion_imagen > $proporcion_miniatura ){
+					$miniatura_ancho = $miniatura_ancho_maximo;
+					$miniatura_alto = $miniatura_ancho_maximo / $proporcion_imagen;
+				} else if ( $proporcion_imagen < $proporcion_miniatura ){
+					$miniatura_ancho = $miniatura_alto_maximo * $proporcion_imagen;
+					$miniatura_alto = $miniatura_alto_maximo;
+				} else {
+					$miniatura_ancho = $miniatura_ancho_maximo;
+					$miniatura_alto = $miniatura_alto_maximo;
+				}
+
+				$lienzo = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
+				imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
+				imagejpeg($lienzo, $row[4], 80);
+
+				echo "<img src='".$row[4]."' alt='' >";	
 			}
 			echo "<hr>";
 		}
@@ -287,14 +333,14 @@ class clase_mysql{
 	}
 
 	function chat($id_grupo,$id_user, $sms){
-    $res = $this->consulta("insert into chat (id_grupo, id_usuario, mensaje) values ('".$id_grupo."', '".$id_usuario."','$sms')");
-    return $res;
-  }
-  function conversacion($id_grupo){
-    $res = $this->consulta("select id_usuario, mensaje from chat where id_grupo = '".$id_grupo."' order by id_chat asc");
-    return $res;
+		$res = $this->consulta("INSERT INTO chat VALUES ('','$id_grupo','$id_user','$sms')");
+		return $res;
+	}
+	function conversacion($id_grupo){
+		$res = $this->consulta("select id_usuario, mensaje from chat where id_grupo = '".$id_grupo."' order by id_chat asc");
+		return $res;
 
-  }
+	}
 
 }
 

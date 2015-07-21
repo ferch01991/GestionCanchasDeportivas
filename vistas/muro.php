@@ -94,7 +94,7 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
         echo "<h5>";
         echo $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ";
         echo "</h5>";
-        echo "<div align='center'><a href='../vistas/mapa.php?nombreCancha=$row[1]&idUsuario=$usuario[0]&idPartido=$row[4]&op=2'>Hagale! </a></div>";
+        echo "<div align='center'><a href='../vistas/mapa.php?nombreCancha=$row[1]&idUsuario=$idUsuario&idPartido=$row[4]&op=2'>Hagale! </a></div>";
         echo "<hr>";
       }
       ?>

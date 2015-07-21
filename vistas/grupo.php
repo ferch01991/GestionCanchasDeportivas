@@ -18,28 +18,33 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 	<?php
 	extract($_GET);
 	$grupo = $conexion->datosGrupo($idGrupo);
+	$nombreGrupo = $grupo[0];
+	$logoGrupo = $grupo[1];
+	$idGrupo = $grupo[2];
 	$usuario = $conexion->datosUsuario($idUsuario);
+	$idUsuario = $usuario[0];
 	include("../static/menu1.php");
 	?>
 
 	<div class="container" id="izquierda" align="center">
 		<div>
-			<?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$grupo[1]." WIDTH=140 WEIGTH=140>"?>
-			<h4><?php echo $grupo[0] ?> </h4>
+			<?php echo "<img id='imagenUsuario' align='center' position='relative' src=".$logoGrupo." WIDTH=140 WEIGTH=140>"?>
+			<h4><?php echo $nombreGrupo ?> </h4>
+			<?php echo "<a href='mapa.php' target='tuArchivo' onclick=\"window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false;\"> Contrato </a>"; ?>
 		</div>
 		<br>
 		<div id="integrantesGrupo">
 			<h5 align="left">Integrantes:</h5>
 			<br>
 			<?php
-			$usuarios = $conexion->usuarios($grupo[2]);
+			$usuarios = $conexion->usuarios($idGrupo);
+			echo "<div align='left'>";
 			while ($row = mysql_fetch_row($usuarios)) {
-				$espacio = "    ";
 				echo "<img src='".$row[1]."' alt='' width='20' height='20'>";
-				echo "<label>".$espacio.$row[0]." ".$row[2]."</label>";
-				
+				echo "<label>".$row[0]." ".$row[2]."</label>";
 				echo "<br>";					
 			}
+			echo "</div>";
 			?>
 		</div>
 	</div>
@@ -52,16 +57,18 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<input name="encabezado" class="form-control" type="text" placeholder="Que hay?">
 				<br>
 				<input type="file" class="form-control" placeholder="" name="imagen">
-				<?php echo "<input required type='hidden' class=form-'control' name='idUsuario' value=".$idUsuario."> "?>
+				<?php echo "<input required type='hidden' class=form-'control' name='idUsuario' value=".$usuario[0]."> "?>
 				<?php echo "<input required type='hidden' class=form-'control' name='idGrupo' value=".$idGrupo."> "?>
 				<br>
 				<div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Publicar</button></div>
 			</form>
 		</div>
 		<br>
+		<br>
+		<br>
 		<div id="comentariosGrupo">
 			<?php 
-			$conexion->comentariosGrupo($grupo[2]);
+			$conexion->comentariosGrupo($idGrupo);
 			?>
 		</div>
 	</div>
@@ -122,8 +129,8 @@ $conexion->conectar($db_name,$db_host, $db_user,$db_password);
 				<div class="panel-body">
 					<div id="conversacion" style="overflow: scroll;">
 					</div>
-					<?php echo "<input type='hidden' name='idGrupo' value =".$_GET['idGrupo']." >"?>
-					<?php echo "<input required name='idUsuario' type='hidden' value=".$_GET['idUsuario'].">"?>
+					<?php echo "<input type='hidden' name='idGrupo' value =".$idGrupo." >"?>
+					<?php echo "<input required name='idUsuario' type='hidden' value=".$idUsuario.">"?>
 					<div class="panel-footer">
 						<div class="input-group">
 							<input type="text" class="form-control" id="mensaje" name="mensaje">
