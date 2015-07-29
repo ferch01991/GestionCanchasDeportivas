@@ -29,10 +29,10 @@ class clase_mysql{
 		if(!mysql_select_db($this->BaseDatos, $this->Conexion_ID)){
 			$this->Error="Imposible abrir ".$this->BaseDatos;
 			return 0;
-		} 	
+		}
 		/*Si todo tiene exito, retorno el identificador de la conexion*/
 		return $this->Conexion_ID;
-	}	
+	}
  	//Ejecuta cualquier consulta
 	function consulta($sql=""){
 		if($sql==""){
@@ -68,13 +68,13 @@ class clase_mysql{
 			if($usuario==$user && $password==$pass){
 				return 1;
 			}
-		}	
+		}
 		return 0;
 	}
 	function ejecutar($sql){
 		$ressql=mysql_query($sql);
 		if($ressql==NULL){
-			echo mysql_error();	
+			echo mysql_error();
 		}
 	}
 	function sacarID($sql){
@@ -136,7 +136,7 @@ class clase_mysql{
 			array_push($datos, $row[4]);
 			array_push($datos, $row[5]);
 		}
-		return $datos; 
+		return $datos;
 	}
 	function listajugadores(){
 		echo "<div id='derecha' align='center' style='float: right;height: 562px; margin: -630px 1em 1em;'>";
@@ -148,7 +148,7 @@ class clase_mysql{
 			echo "<h5 style='color: #000'>".$nombre."</h5>";
 			echo "<hr>";
 		}
-		echo "</div>";  
+		echo "</div>";
 		echo "</div>";
 	}
 	function selectcancha(){
@@ -182,7 +182,7 @@ class clase_mysql{
 		return $grupo;
 	}
 	function controlCancha($cancha, $fecha, $hora){
-		$res = $this->consulta("select p.id_cancha, p.fecha, p.hora from partidos p 
+		$res = $this->consulta("select p.id_cancha, p.fecha, p.hora from partidos p
 			where p.id_cancha = '".$cancha."' and p.fecha = '".$fecha."' and hora = '".$hora."'");
 		$datos = array();
 		while ($row = mysql_fetch_array($res)) {
@@ -190,7 +190,7 @@ class clase_mysql{
 			array_push($datos, $row[1]);
 			array_push($datos, $row[2]);
 		}
-		return count($datos);		
+		return count($datos);
 	}
 	function invitacionesPartido($idUsuario){
 		$res = $this->consulta("SELECT * FROM confirmaciones WHERE confirmaciones.id_usuario = $idUsuario AND confirmaciones.estado = 'pendiente'");
@@ -283,7 +283,7 @@ class clase_mysql{
 				imagecopyresampled($lienzo, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
 				imagejpeg($lienzo, $row[4], 80);
 
-				echo "<img src='".$row[4]."' alt='' >";	
+				echo "<img src='".$row[4]."' alt='' >";
 			}
 			echo "</div>";
 			echo "<hr>";
@@ -301,8 +301,8 @@ class clase_mysql{
 
 			echo "<p style='color:white'>".$row[3]."</p>";
 			echo "<div align='center'>";
-			if ($row[4]){		
-				echo "<img src='".$row[4]."' alt=''>";	
+			if ($row[4]){
+				echo "<img src='".$row[4]."' alt=''>";
 			}
 			echo "</div>";
 			echo "<hr>";

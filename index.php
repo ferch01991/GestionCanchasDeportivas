@@ -41,7 +41,7 @@ include("static/clase_mysql.php");
           <input required type="text" class="form-control" placeholder="Nombres" name="nombres">
         </div>
         <div class="col-sm-6">
-          <input required type="text" class="form-control" placeholder="Apellidos" name="apellidos">  
+          <input required type="text" class="form-control" placeholder="Apellidos" name="apellidos">
         </div>
       </div>
       <div class="form-group">
@@ -55,14 +55,14 @@ include("static/clase_mysql.php");
         <select class="form-control" name="genero">
           <option value="Hombre">Hombre</option>
           <option value="Mujer">Mujer</option>
-        </select>        
+        </select>
       </div>
       <div align="center"><button name="botonEnviar" type="submit" class="btn btn-success">Registrar</button></div>
-      
-      
+
+
     </form>
   </div>
-  
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
